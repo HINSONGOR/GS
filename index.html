@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>HINSON 常識冒險王國</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+<div id="starsWrap"></div>
+
+<!-- Audio Controls (always visible) -->
+<div id="audioControls" style="display:none">
+    <button id="musicToggle" class="audio-ctrl-btn" onclick="AudioMgr.toggleMusic()" title="音樂開關">🎵</button>
+    <input type="range" id="volSlider" min="0" max="1" step="0.1" value="0.4" oninput="AudioMgr.setVolume(this.value)" title="音量">
+</div>
+
+<!-- ============ SCREEN: WELCOME ============ -->
+<div id="screen-welcome" class="screen active">
+    <div class="welcome-wrap">
+        <div class="lightning-left">⚡</div>
+        <div class="lightning-right">⚡</div>
+        <div class="hogwarts-crest">🏰</div>
+        <h1 class="title-hp">HINSON</h1>
+        <h2 class="title-sub">常識冒險王國</h2>
+        <p class="title-tag">⚡ 霍格華茲常識學院 · 六年級魔法課 ⚡</p>
+        <div class="welcome-card pixel-border">
+            <div class="card-inner">
+                <p class="welcome-prompt">🧙 歡迎，小巫師！請輸入你的名字：</p>
+                <input type="text" id="playerNameInput" class="pixel-input" placeholder="你的名字..." maxlength="16" onkeydown="if(event.key==='Enter')App.startGame()">
+                <button class="pixel-btn gold big" onclick="App.startGame()">✨ 開始冒險！</button>
+                <button class="pixel-btn small grey" onclick="App.showParentLogin()">👨‍👩‍👧 家長模式</button>
+            </div>
+        </div>
+        <div class="floating-books">📚 📖 📕 📗 📘</div>
+    </div>
+</div>
+
+<!-- ============ SCREEN: DAILY REWARD ============ -->
+<div id="screen-daily-reward" class="screen">
+    <div class="reward-wrap">
+        <div class="reward-card pixel-border golden">
+            <div class="reward-stars">✨ ⭐ 🌟 ⭐ ✨</div>
+            <h2 class="reward-title">🎁 每日登入獎勵！</h2>
+            <div class="streak-row">
+                <span class="streak-label">連續登入</span>
+                <span class="streak-num" id="streakCount">1</span>
+                <span class="streak-label">天</span>
+            </div>
+            <div class="reward-items" id="rewardItems"></div>
+            <div class="reward-anim" id="rewardAnim">🌟</div>
+            <button class="pixel-btn gold big" onclick="App.claimReward()">領取獎勵！ 🎉</button>
+        </div>
+    </div>
+</div>
+
+<!-- ============ SCREEN: DASHBOARD ============ -->
+<div id="screen-dashboard" class="screen">
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="player-avatar-wrap">
+            <div class="player-avatar" id="dashAvatar">🧙</div>
+        </div>
+        <div class="player-info">
+            <div class="player-name" id="dashName">學生</div>
+            <div class="player-level">⭐ Lv.<span id="dashLevel">1</span></div>
+        </div>
+        <div class="xp-wrap">
+            <div class="xp-label-row">
+                <span>XP</span><span id="dashXpText">0/100</span>
+            </div>
+            <div class="xp-bar-outer">
+                <div class="xp-bar-inner" id="dashXpBar"></div>
+            </div>
+        </div>
+        <div class="coins-wrap">
+            <span class="coin-icon">🪙</span>
+            <span class="coin-num" id="dashCoins">0</span>
+        </div>
+        <div class="streak-wrap">
+            <span>🔥</span><span id="dashStreak">0</span>
+        </div>
+    </div>
+
+    <!-- Dashboard Body -->
+    <div class="dash-body">
+        <div class="dash-title-row">
+            <h2 class="dash-title">⚡ 選擇你的學習之路 ⚡</h2>
+        </div>
+
+        <div class="quick-grid">
+            <button class="quick-card" onclick="App.showScreen('screen-modules')">
+                <div class="qc-icon">📚</div>
+                <div class="qc-label">開始學習</div>
+            </button>
+            <button class="quick-card" onclick="App.showScreen('screen-wrong-review')">
+                <div class="qc-icon">🏆</div>
+                <div class="qc-label">錯題重溫</div>
+            </button>
+            <button class="quick-card" onclick="App.showScreen('screen-report')">
+                <div class="qc-icon">📈</div>
+                <div class="qc-label">學習報告</div>
+            </button>
+            <button class="quick-card" onclick="App.showBadgesModal()">
+                <div class="qc-icon">🎖️</div>
+                <div class="qc-label">我的勳章</div>
+            </button>
+        </div>
+
+        <div class="today-box pixel-border">
+            <h3>📅 今日進度</h3>
+            <div class="today-stats">
+                <div class="td-stat"><div class="td-num" id="todayQ">0</div><div class="td-lbl">已答題</div></div>
+                <div class="td-stat"><div class="td-num" id="todayC">0</div><div class="td-lbl">答對</div></div>
+                <div class="td-stat"><div class="td-num" id="todayXP">0</div><div class="td-lbl">XP</div></div>
+                <div class="td-stat"><div class="td-num" id="todayCoinsEarned">0</div><div class="td-lbl">🪙</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ SCREEN: MODULES ============ -->
+<div id="screen-modules" class="screen">
+    <div class="screen-header">
+        <button class="back-btn" onclick="App.showScreen('screen-dashboard')">← 返回</button>
+        <h2>📚 選擇課題</h2>
+        <div></div>
+    </div>
+    <div class="modules-grid">
+        <div class="module-card" onclick="App.selectModule('6.1')">
+            <div class="mod-icon">🌱</div>
+            <div class="mod-num">6.1</div>
+            <div class="mod-name">處變不驚</div>
+            <div class="mod-prog-wrap"><div class="mod-prog" id="mprog-6.1"></div></div>
+            <div class="mod-prog-txt" id="mprog-txt-6.1">0%</div>
+        </div>
+        <div class="module-card" onclick="App.selectModule('6.2')">
+            <div class="mod-icon">🔬</div>
+            <div class="mod-num">6.2</div>
+            <div class="mod-name">科技天地</div>
+            <div class="mod-prog-wrap"><div class="mod-prog" id="mprog-6.2"></div></div>
+            <div class="mod-prog-txt" id="mprog-txt-6.2">0%</div>
+        </div>
+        <div class="module-card" onclick="App.selectModule('6.3')">
+            <div class="mod-icon">🐉</div>
+            <div class="mod-num">6.3</div>
+            <div class="mod-name">中國的變遷</div>
+            <div class="mod-prog-wrap"><div class="mod-prog" id="mprog-6.3"></div></div>
+            <div class="mod-prog-txt" id="mprog-txt-6.3">0%</div>
+        </div>
+        <div class="module-card" onclick="App.selectModule('6.4')">
+            <div class="mod-icon">🏙️</div>
+            <div class="mod-num">6.4</div>
+            <div class="mod-name">香港特別行政區</div>
+            <div class="mod-prog-wrap"><div class="mod-prog" id="mprog-6.4"></div></div>
+            <div class="mod-prog-txt" id="mprog-txt-6.4">0%</div>
+        </div>
+        <div class="module-card" onclick="App.selectModule('6.5')">
+            <div class="mod-icon">🦋</div>
+            <div class="mod-num">6.5</div>
+            <div class="mod-name">生物世界</div>
+            <div class="mod-prog-wrap"><div class="mod-prog" id="mprog-6.5"></div></div>
+            <div class="mod-prog-txt" id="mprog-txt-6.5">0%</div>
+        </div>
+        <div class="module-card" onclick="App.selectModule('6.6')">
+            <div class="mod-icon">🌍</div>
+            <div class="mod-num">6.6</div>
+            <div class="mod-name">放眼世界</div>
+            <div class="mod-prog-wrap"><div class="mod-prog" id="mprog-6.6"></div></div>
+            <div class="mod-prog-txt" id="mprog-txt-6.6">0%</div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ SCREEN: QUESTION TYPES ============ -->
+<div id="screen-question-types" class="screen">
+    <div class="screen-header">
+        <button class="back-btn" onclick="App.showScreen('screen-modules')">← 返回</button>
+        <h2 id="qtypeModTitle">選擇題型</h2>
+        <div></div>
+    </div>
+    <div class="qtype-grid">
+        <div class="qtype-card" onclick="App.startQuiz('mc')">
+            <div class="qt-icon">📚</div>
+            <div class="qt-name">選擇題</div>
+            <div class="qt-desc">四選一</div>
+        </div>
+        <div class="qtype-card" onclick="App.startQuiz('fill')">
+            <div class="qt-icon">🏮</div>
+            <div class="qt-name">填充題</div>
+            <div class="qt-desc">填入答案</div>
+        </div>
+        <div class="qtype-card" onclick="App.startQuiz('short')">
+            <div class="qt-icon">✏️</div>
+            <div class="qt-name">簡答題</div>
+            <div class="qt-desc">文字回答</div>
+        </div>
+        <div class="qtype-card" onclick="App.startQuiz('analysis')">
+            <div class="qt-icon">📖</div>
+            <div class="qt-name">分析題</div>
+            <div class="qt-desc">深入分析</div>
+        </div>
+        <div class="qtype-card" onclick="App.startQuiz('classify')">
+            <div class="qt-icon">📝</div>
+            <div class="qt-name">分類題</div>
+            <div class="qt-desc">分類整理</div>
+        </div>
+        <div class="qtype-card" onclick="App.startQuiz('scenario')">
+            <div class="qt-icon">🎯</div>
+            <div class="qt-name">生活情景題</div>
+            <div class="qt-desc">解決問題</div>
+        </div>
+        <div class="qtype-card" onclick="App.startQuiz('order')">
+            <div class="qt-icon">🔢</div>
+            <div class="qt-name">排序題</div>
+            <div class="qt-desc">按序排列</div>
+        </div>
+        <div class="qtype-card" onclick="App.startQuiz('match')">
+            <div class="qt-icon">🔗</div>
+            <div class="qt-name">配對題</div>
+            <div class="qt-desc">左右配對</div>
+        </div>
+        <div class="qtype-card" onclick="App.startQuiz('reading')">
+            <div class="qt-icon">📕</div>
+            <div class="qt-name">閱讀理解</div>
+            <div class="qt-desc">閱讀文章</div>
+        </div>
+        <div class="qtype-card full-span" onclick="App.startQuiz('mixed')">
+            <div class="qt-icon">⚡</div>
+            <div class="qt-name">魔法挑戰！（混合）</div>
+            <div class="qt-desc">所有題型混合 · 全面挑戰！</div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ SCREEN: QUIZ ============ -->
+<div id="screen-quiz" class="screen">
+    <!-- Quiz Header -->
+    <div class="quiz-hdr">
+        <button class="back-btn" onclick="App.exitQuiz()">✕ 退出</button>
+        <div class="quiz-meta-row">
+            <span class="quiz-badge" id="qModBadge">模組</span>
+            <span class="quiz-badge type" id="qTypeBadge">題型</span>
+        </div>
+        <div class="quiz-hdr-right">
+            <div class="quiz-coin-disp">🪙 <span id="qCoins">0</span></div>
+            <div class="timer-disp" id="timerDisp">⏱ <span id="timerTxt">—</span></div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="quiz-prog-row">
+        <div class="quiz-prog-bar"><div class="quiz-prog-fill" id="qProgFill"></div></div>
+        <div class="quiz-counter" id="qCounter">1/10</div>
+    </div>
+
+    <!-- Question Card -->
+    <div class="q-card pixel-border" id="qCard">
+        <!-- Reading Passage -->
+        <div id="readPassage" style="display:none" class="read-passage">
+            <div class="passage-hdr">
+                📕 閱讀文章
+                <button class="tts-btn" onclick="AudioMgr.speakEl('passageBody')">🔊 朗讀</button>
+            </div>
+            <div class="passage-body" id="passageBody"></div>
+        </div>
+
+        <!-- Question -->
+        <div class="q-top-row">
+            <span class="q-type-badge" id="qTypeLbl">選擇題</span>
+            <button class="tts-btn" onclick="AudioMgr.speakEl('qText')">🔊 朗讀</button>
+        </div>
+        <div class="q-text" id="qText">題目載入中⋯</div>
+
+        <!-- Timer Bar -->
+        <div class="timer-bar-wrap" id="timerBarWrap">
+            <div class="timer-bar-fill" id="timerBarFill"></div>
+        </div>
+
+        <!-- Answer Area -->
+        <div class="answer-area" id="answerArea"></div>
+    </div>
+
+    <!-- Quiz Nav -->
+    <div class="quiz-nav-row" id="quizNavRow">
+        <button class="pixel-btn grey" onclick="QuizEngine.skip()">跳過</button>
+        <button class="pixel-btn gold" id="submitBtn" onclick="QuizEngine.submit()">提交 ✓</button>
+    </div>
+
+    <!-- Feedback -->
+    <div class="feedback-area" id="feedbackArea" style="display:none">
+        <div class="feedback-result" id="feedbackResult"></div>
+        <div class="teacher-box pixel-border">
+            <div class="teacher-hdr">🧙 小老師講解</div>
+            <div class="teacher-body" id="teacherBody"></div>
+            <button class="tts-btn" onclick="AudioMgr.speakEl('teacherBody')">🔊 朗讀解釋</button>
+        </div>
+        <button class="pixel-btn gold big" onclick="QuizEngine.next()">下一題 →</button>
+    </div>
+</div>
+
+<!-- ============ SCREEN: RESULTS ============ -->
+<div id="screen-results" class="screen">
+    <div class="results-wrap">
+        <div class="results-card pixel-border">
+            <h2 id="resultsTitle">🏆 完成！</h2>
+            <div class="score-circle-wrap">
+                <div class="score-circle">
+                    <span id="resultsPct">0</span><span class="pct-sign">%</span>
+                </div>
+                <div class="score-grade" id="resultsGrade">優秀！</div>
+            </div>
+            <div class="results-stats-row">
+                <div class="r-stat"><div class="r-num" id="rCorrect">0</div><div class="r-lbl">✅ 答對</div></div>
+                <div class="r-stat"><div class="r-num" id="rWrong">0</div><div class="r-lbl">❌ 答錯</div></div>
+                <div class="r-stat"><div class="r-num" id="rXP">+0</div><div class="r-lbl">⭐ XP</div></div>
+                <div class="r-stat"><div class="r-num" id="rCoins">+0</div><div class="r-lbl">🪙 金幣</div></div>
+            </div>
+            <div class="results-badges" id="resultsBadges"></div>
+            <div class="results-btns">
+                <button class="pixel-btn grey" onclick="App.showScreen('screen-modules')">換課題</button>
+                <button class="pixel-btn gold" onclick="App.retryQuiz()">再做一次 🔄</button>
+                <button class="pixel-btn red" onclick="App.goWrongReview()">重溫錯題 🏆</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ SCREEN: WRONG REVIEW ============ -->
+<div id="screen-wrong-review" class="screen">
+    <div class="screen-header">
+        <button class="back-btn" onclick="App.showScreen('screen-dashboard')">← 返回</button>
+        <h2>🏆 錯題重溫中心</h2>
+        <div></div>
+    </div>
+    <div class="wrong-content">
+        <div class="wrong-filter-row">
+            <label>按課題：</label>
+            <select id="wrongFilter" class="pixel-select" onchange="WrongCenter.render()">
+                <option value="all">全部課題</option>
+                <option value="6.1">6.1 處變不驚</option>
+                <option value="6.2">6.2 科技天地</option>
+                <option value="6.3">6.3 中國的變遷</option>
+                <option value="6.4">6.4 香港特別行政區</option>
+                <option value="6.5">6.5 生物世界</option>
+                <option value="6.6">6.6 放眼世界</option>
+            </select>
+            <span id="wrongCount" class="wrong-count-badge">0 題</span>
+        </div>
+        <div id="wrongList" class="wrong-list"></div>
+        <div class="wrong-action-row">
+            <button class="pixel-btn gold" onclick="WrongCenter.retryAll()">重做所有錯題 ⚡</button>
+            <button class="pixel-btn red" onclick="WrongCenter.clearAll()">清除所有錯題 🗑️</button>
+        </div>
+    </div>
+</div>
+
+<!-- ============ SCREEN: REPORT ============ -->
+<div id="screen-report" class="screen">
+    <div class="screen-header">
+        <button class="back-btn" onclick="App.showScreen('screen-dashboard')">← 返回</button>
+        <h2>📈 學習報告中心</h2>
+        <div></div>
+    </div>
+    <div class="report-content">
+        <div class="report-section pixel-border">
+            <h3>📊 總體成績</h3>
+            <div class="report-ov-grid">
+                <div class="ov-item"><div class="ov-n" id="repTotal">0</div><div class="ov-l">總答題數</div></div>
+                <div class="ov-item"><div class="ov-n" id="repCorrect">0</div><div class="ov-l">總答對數</div></div>
+                <div class="ov-item"><div class="ov-n" id="repAcc">—</div><div class="ov-l">整體正確率</div></div>
+                <div class="ov-item"><div class="ov-n" id="repMaxStreak">0</div><div class="ov-l">最長連勝</div></div>
+            </div>
+        </div>
+        <div class="report-section pixel-border">
+            <h3>📚 各課題成績</h3>
+            <div id="repModules"></div>
+        </div>
+        <div class="report-section pixel-border">
+            <h3>⚠️ 弱項分析</h3>
+            <div id="repWeakness"></div>
+        </div>
+        <div class="report-section pixel-border">
+            <h3>🎖️ 已獲勳章</h3>
+            <div id="repBadges" class="badge-grid"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ SCREEN: PARENT MODE ============ -->
+<div id="screen-parent" class="screen">
+    <div class="screen-header">
+        <button class="back-btn" onclick="App.showScreen('screen-dashboard')">← 返回</button>
+        <h2>👨‍👩‍👧 家長模式</h2>
+        <button class="pixel-btn small red" onclick="App.parentLogout()">登出</button>
+    </div>
+    <div class="parent-tabs-row">
+        <button class="ptab active" id="ptab-stats" onclick="ParentMode.tab('stats')">📊 統計</button>
+        <button class="ptab" id="ptab-upload" onclick="ParentMode.tab('upload')">📤 上載</button>
+        <button class="ptab" id="ptab-manage" onclick="ParentMode.tab('manage')">⚙️ 管理</button>
+    </div>
+
+    <!-- Stats Tab -->
+    <div id="ptabContent-stats" class="ptab-content">
+        <div class="p-stats-card pixel-border">
+            <h3>學生：<span id="pStudentName">—</span></h3>
+            <div class="p-stat-grid">
+                <div class="p-stat"><div class="p-sn" id="pTotalQ">0</div><div class="p-sl">總答題</div></div>
+                <div class="p-stat"><div class="p-sn" id="pAcc">—</div><div class="p-sl">正確率</div></div>
+                <div class="p-stat"><div class="p-sn" id="pLvl">1</div><div class="p-sl">等級</div></div>
+                <div class="p-stat"><div class="p-sn" id="pLoginStreak">0</div><div class="p-sl">登入連續天</div></div>
+            </div>
+            <h4>各課題表現：</h4>
+            <div id="pModStats"></div>
+            <h4>⚠️ 弱項科目：</h4>
+            <div id="pWeakness"></div>
+        </div>
+    </div>
+
+    <!-- Upload Tab -->
+    <div id="ptabContent-upload" class="ptab-content" style="display:none">
+        <div class="upload-card pixel-border">
+            <h3>📤 上載題目</h3>
+            <p class="upload-hint">支援：PDF · Word (.docx) · 圖片 (JPG/PNG)<br>系統會自動識別文字並加入題庫</p>
+            <div class="upload-drop" id="uploadDrop"
+                ondragover="event.preventDefault();this.classList.add('dragover')"
+                ondragleave="this.classList.remove('dragover')"
+                ondrop="ParentMode.drop(event)">
+                <div class="upload-drop-icon">📂</div>
+                <p>拖放檔案到此處</p>
+                <p>— 或 —</p>
+                <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.bmp" multiple style="display:none" onchange="ParentMode.handleFiles(this.files)">
+                <button class="pixel-btn" onclick="document.getElementById('fileInput').click()">選擇檔案</button>
+            </div>
+            <div id="uploadProgress" class="upload-progress" style="display:none">
+                <div class="up-bar-outer"><div class="up-bar-fill" id="upBarFill"></div></div>
+                <div id="upStatus">處理中⋯</div>
+            </div>
+            <div id="extractedArea" style="display:none" class="extracted-area">
+                <h4>識別文字：</h4>
+                <textarea id="extractedTA" rows="6" class="pixel-input"></textarea>
+                <button class="pixel-btn gold" onclick="ParentMode.addAsQuestion()">➕ 作為題目加入</button>
+            </div>
+        </div>
+
+        <div class="add-q-card pixel-border">
+            <h3>✏️ 手動新增題目</h3>
+            <div class="form-row">
+                <label>課題：</label>
+                <select id="nqModule" class="pixel-select">
+                    <option value="6.1">6.1 處變不驚</option>
+                    <option value="6.2">6.2 科技天地</option>
+                    <option value="6.3">6.3 中國的變遷</option>
+                    <option value="6.4">6.4 香港特別行政區</option>
+                    <option value="6.5">6.5 生物世界</option>
+                    <option value="6.6">6.6 放眼世界</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label>題型：</label>
+                <select id="nqType" class="pixel-select" onchange="ParentMode.updateForm()">
+                    <option value="mc">選擇題</option>
+                    <option value="fill">填充題</option>
+                    <option value="short">簡答題</option>
+                    <option value="analysis">分析題</option>
+                    <option value="classify">分類題</option>
+                    <option value="scenario">生活情景題</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label>題目：</label>
+                <textarea id="nqText" rows="3" class="pixel-input" placeholder="輸入題目⋯"></textarea>
+            </div>
+            <div id="nqMcSection">
+                <div class="form-row"><label>選項A：</label><input type="text" id="nqA" class="pixel-input" placeholder="選項A"></div>
+                <div class="form-row"><label>選項B：</label><input type="text" id="nqB" class="pixel-input" placeholder="選項B"></div>
+                <div class="form-row"><label>選項C：</label><input type="text" id="nqC" class="pixel-input" placeholder="選項C"></div>
+                <div class="form-row"><label>選項D：</label><input type="text" id="nqD" class="pixel-input" placeholder="選項D"></div>
+                <div class="form-row">
+                    <label>正確答案：</label>
+                    <select id="nqMcAns" class="pixel-select">
+                        <option value="0">A</option><option value="1">B</option>
+                        <option value="2">C</option><option value="3">D</option>
+                    </select>
+                </div>
+            </div>
+            <div id="nqTextSection" style="display:none">
+                <div class="form-row">
+                    <label>正確答案：</label>
+                    <textarea id="nqTextAns" rows="2" class="pixel-input" placeholder="輸入正確答案⋯"></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <label>小老師講解：</label>
+                <textarea id="nqExplain" rows="3" class="pixel-input" placeholder="解題說明⋯"></textarea>
+            </div>
+            <button class="pixel-btn gold" onclick="ParentMode.saveQ()">💾 儲存題目</button>
+        </div>
+    </div>
+
+    <!-- Manage Tab -->
+    <div id="ptabContent-manage" class="ptab-content" style="display:none">
+        <div class="manage-card pixel-border">
+            <h3>⚙️ 管理題庫</h3>
+            <div class="form-row">
+                <label>篩選：</label>
+                <select id="manageFilter" class="pixel-select" onchange="ParentMode.renderManage()">
+                    <option value="all">全部</option>
+                    <option value="custom">自訂題目</option>
+                    <option value="6.1">6.1 處變不驚</option>
+                    <option value="6.2">6.2 科技天地</option>
+                    <option value="6.3">6.3 中國的變遷</option>
+                    <option value="6.4">6.4 香港特別行政區</option>
+                    <option value="6.5">6.5 生物世界</option>
+                    <option value="6.6">6.6 放眼世界</option>
+                </select>
+            </div>
+            <div id="manageList"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ MODALS ============ -->
+<!-- Badges Modal -->
+<div id="modal-badges" class="modal-overlay" style="display:none" onclick="if(event.target===this)App.closeModal('modal-badges')">
+    <div class="modal-box pixel-border">
+        <div class="modal-hdr">
+            <h3>🎖️ 我的勳章</h3>
+            <button class="modal-close" onclick="App.closeModal('modal-badges')">✕</button>
+        </div>
+        <div id="badgeGridModal" class="badge-grid"></div>
+    </div>
+</div>
+
+<!-- Level Up Modal -->
+<div id="modal-levelup" class="modal-overlay" style="display:none">
+    <div class="modal-box pixel-border golden-box">
+        <div class="levelup-wrap">
+            <div class="levelup-star">⭐</div>
+            <h2>升級啦！</h2>
+            <div class="levelup-num">Level <span id="lvlupNum">2</span></div>
+            <p>你成為更厲害的魔法師了！</p>
+            <button class="pixel-btn gold big" onclick="App.closeModal('modal-levelup')">繼續冒險！✨</button>
+        </div>
+    </div>
+</div>
+
+<!-- Parent Login Modal -->
+<div id="modal-parent-login" class="modal-overlay" style="display:none" onclick="if(event.target===this)App.closeModal('modal-parent-login')">
+    <div class="modal-box pixel-border">
+        <div class="modal-hdr">
+            <h3>🔒 家長登入</h3>
+            <button class="modal-close" onclick="App.closeModal('modal-parent-login')">✕</button>
+        </div>
+        <p>預設密碼：<strong>1234</strong></p>
+        <div class="form-row">
+            <input type="password" id="parentPw" class="pixel-input" placeholder="輸入密碼⋯" onkeydown="if(event.key==='Enter')App.verifyParent()">
+        </div>
+        <button class="pixel-btn gold" onclick="App.verifyParent()">登入</button>
+    </div>
+</div>
+
+<!-- Edit Question Modal -->
+<div id="modal-edit-q" class="modal-overlay" style="display:none" onclick="if(event.target===this)App.closeModal('modal-edit-q')">
+    <div class="modal-box pixel-border wide">
+        <div class="modal-hdr">
+            <h3>✏️ 編輯題目</h3>
+            <button class="modal-close" onclick="App.closeModal('modal-edit-q')">✕</button>
+        </div>
+        <div id="editQForm"></div>
+        <div class="modal-btns">
+            <button class="pixel-btn gold" onclick="ParentMode.saveEdit()">💾 儲存</button>
+            <button class="pixel-btn grey" onclick="App.closeModal('modal-edit-q')">取消</button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
