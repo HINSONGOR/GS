@@ -1810,6 +1810,18 @@ const QuizEngine = {
         const t2 = document.createElement('div');
         t2.className = 'classify-tag';
         t2.textContent = sel;
+        t2.title = '點擊取消';
+        t2.onclick = () => {
+          // Remove from bin state
+          this.classify_state[cat] = this.classify_state[cat].filter(x => x !== t2.textContent);
+          t2.remove();
+          // Return to pool
+          document.querySelectorAll('.classify-pool .classify-tag').forEach(pt => {
+            if (pt.textContent === t2.textContent) { pt.style.display = ''; pt.style.outline = ''; }
+          });
+          this.classify_state._selected = null;
+          this.currentUserAnswer = Object.assign({}, this.classify_state);
+        };
         items.appendChild(t2);
         this.classify_state._selected = null;
         this.currentUserAnswer = Object.assign({}, this.classify_state);
