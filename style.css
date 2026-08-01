@@ -883,6 +883,21 @@ textarea.pixel-input { resize: vertical; }
   padding: 4px 10px; border-radius: 4px; font-size: 12px; margin: 4px;
 }
 .badge-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* Daily Log */
+.dlog-day { margin-bottom: 14px; }
+.dlog-date { font-size: 13px; color: var(--hp-gold); font-weight: bold; margin-bottom: 6px; }
+.dlog-day-summary { font-weight: normal; opacity: 0.75; font-size: 12px; }
+.dlog-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 5px 8px; border-radius: 6px;
+  background: rgba(255,255,255,0.04);
+  margin-bottom: 4px; font-size: 12px;
+}
+.dlog-mod { width: 50px; color: var(--hp-gold); flex-shrink: 0; }
+.dlog-type { flex: 1; color: rgba(245,230,200,0.7); }
+.dlog-score { width: 100px; flex-shrink: 0; font-weight: bold; }
+.dlog-time { width: 70px; flex-shrink: 0; color: rgba(245,230,200,0.5); text-align: right; }
 .badge-item {
   background: rgba(212,175,55,0.1);
   border: 2px solid var(--hp-gold);

@@ -1357,7 +1357,8 @@ let STATE = {
   wrongBank: [],
   customQuestions: [],
   settings: { musicOn: true, volume: 0.4 },
-  parentUnlocked: false
+  parentUnlocked: false,
+  dailyLog: []
 };
 
 const XP_PER_LEVEL = 100;
@@ -2147,6 +2148,24 @@ const QuizEngine = {
     if (pct === 100 && total > 0) STATE.stats.lastPerfect = true;
     else STATE.stats.lastPerfect = false;
 
+    // Daily log entry
+    const elapsed = this.totalTime - this.timeLeft;
+    const logEntry = {
+      date: new Date().toISOString().slice(0,10),
+      ts: Date.now(),
+      module: STATE.currentModule || '—',
+      qtype: STATE.currentQType || '—',
+      total,
+      correct,
+      pct,
+      secs: elapsed > 0 ? elapsed : 0
+    };
+    if (!STATE.dailyLog) STATE.dailyLog = [];
+    STATE.dailyLog.push(logEntry);
+    // Keep only last 90 days
+    const cutoff = Date.now() - 90 * 86400000;
+    STATE.dailyLog = STATE.dailyLog.filter(e => e.ts >= cutoff);
+
     Rewards.checkBadges();
     Store.save();
 
@@ -2495,6 +2514,45 @@ const Report = {
         <div class="b-name">${b.name}</div>
       </div>`;
     });
+
+    // Daily log — last 14 days
+    const logEl = document.getElementById('repDailyLog');
+    if (logEl) {
+      const log = (STATE.dailyLog || []).slice().reverse();
+      if (!log.length) {
+        logEl.innerHTML = '<p style="color:rgba(245,230,200,0.5)">尚未有紀錄，完成測驗後將自動記錄。</p>';
+      } else {
+        // Group by date
+        const byDate = {};
+        log.forEach(e => {
+          if (!byDate[e.date]) byDate[e.date] = [];
+          byDate[e.date].push(e);
+        });
+        const cutDate = new Date(Date.now() - 14*86400000).toISOString().slice(0,10);
+        let html = '';
+        Object.keys(byDate).filter(d => d >= cutDate).sort((a,b) => b.localeCompare(a)).forEach(date => {
+          const entries = byDate[date];
+          const dayTotal = entries.reduce((s,e)=>s+e.total,0);
+          const dayCorrect = entries.reduce((s,e)=>s+e.correct,0);
+          const dayPct = dayTotal>0 ? Math.round(dayCorrect/dayTotal*100) : 0;
+          html += `<div class="dlog-day">
+            <div class="dlog-date">📅 ${date} &nbsp;<span class="dlog-day-summary">${entries.length}次練習 · ${dayTotal}題 · 正確率${dayPct}%</span></div>`;
+          entries.forEach(e => {
+            const mins = Math.floor(e.secs/60), secs = e.secs%60;
+            const timeStr = e.secs>0 ? `${mins}分${secs}秒` : '—';
+            const col = e.pct>=80?'#4ade80':e.pct>=60?'#facc15':'#f87171';
+            html += `<div class="dlog-row">
+              <span class="dlog-mod">${e.module}</span>
+              <span class="dlog-type">${App.typeName(e.qtype)}</span>
+              <span class="dlog-score" style="color:${col}">${e.correct}/${e.total} (${e.pct}%)</span>
+              <span class="dlog-time">⏱ ${timeStr}</span>
+            </div>`;
+          });
+          html += '</div>';
+        });
+        logEl.innerHTML = html || '<p style="color:rgba(245,230,200,0.5)">最近14日沒有紀錄。</p>';
+      }
+    }
   }
 };
 
