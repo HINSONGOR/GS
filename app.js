@@ -1678,6 +1678,7 @@ const QuizEngine = {
     this.idx = 0; this.answers = [];
     this.sessionCorrect = 0; this.earnedXP = 0; this.earnedCoins = 0;
     this.newBadges = []; this.submitted = false;
+    this.sessionStartTime = Date.now();
     App.showScreen('screen-quiz');
     this.renderQuestion();
   },
@@ -2231,7 +2232,7 @@ const QuizEngine = {
     else STATE.stats.lastPerfect = false;
 
     // Daily log entry
-    const elapsed = this.totalTime - this.timeLeft;
+    const elapsed = this.sessionStartTime ? Math.round((Date.now() - this.sessionStartTime) / 1000) : 0;
     const logEntry = {
       date: new Date().toISOString().slice(0,10),
       ts: Date.now(),
