@@ -312,6 +312,7 @@ textarea.pixel-input { resize: vertical; }
 .coins-wrap { display: flex; align-items: center; gap: 5px; font-size: 18px; }
 .coin-num { font-weight: 900; font-size: 18px; color: var(--hp-gold2); }
 .streak-wrap { display: flex; align-items: center; gap: 4px; font-size: 16px; font-weight: 700; color: #ff7a00; }
+.parent-mode-btn { background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.4); border-radius: 6px; color: var(--hp-parchment); font-size: 18px; padding: 4px 8px; cursor: pointer; line-height: 1; }
 
 /* ==========================================
    DASHBOARD
