@@ -3107,7 +3107,8 @@ function gsOpenGacha(){
   gsSwitchTab('pool');
   document.getElementById('gs-gacha-result').classList.add('hidden');
   const cap=document.getElementById('gs-gacha-capsule');
-  cap.classList.remove('spinning','popping');
+  cap.className='gacha-egg'; cap.style.display='';
+  document.getElementById('gs-gacha-prize-burst').className='gacha-prize-burst';
   App.openModal('modal-gs-gacha');
 }
 function gsUpdateGachaBtn(){
@@ -3115,7 +3116,7 @@ function gsUpdateGachaBtn(){
   if(!btn)return;
   const cost=STATE.gachaCost||300;
   if(STATE.coins<cost){btn.disabled=true;btn.innerHTML=`<span class="gsb-icon">🪙</span><span class="gsb-text">金幣不足</span><span class="gsb-cost">需 ${cost} 🪙</span>`;}
-  else{btn.disabled=false;btn.innerHTML=`<span class="gsb-icon">🎰</span><span class="gsb-text">扭蛋！</span><span class="gsb-cost">-${cost} 🪙</span>`;}
+  else{btn.disabled=false;btn.innerHTML=`<span class="gsb-icon">🥚</span><span class="gsb-text">扭蛋！</span><span class="gsb-cost">-${cost} 🪙</span>`;}
 }
 function gsSwitchTab(tab){
   document.getElementById('gstab-pool').classList.toggle('active',tab==='pool');
@@ -3136,7 +3137,10 @@ function gsSpinGacha(){
   document.getElementById('gs-gacha-spin-btn').disabled=true;
   document.getElementById('gs-gacha-result').classList.add('hidden');
   const cap=document.getElementById('gs-gacha-capsule');
-  cap.classList.add('spinning');
+  const burst=document.getElementById('gs-gacha-prize-burst');
+  cap.style.display=''; burst.className='gacha-prize-burst';
+  cap.className='gacha-egg wobbling';
+  setTimeout(()=>{ cap.className='gacha-egg shaking'; },1000);
   setTimeout(()=>{
     const prizes=gsGetPrizes();
     const total=prizes.reduce((s,p)=>s+p.weight,0);
@@ -3147,16 +3151,20 @@ function gsSpinGacha(){
     STATE.gachaHistory.unshift({date:new Date().toISOString().slice(0,10),emoji:picked.emoji,name:picked.name,coins:cost});
     if(STATE.gachaHistory.length>50)STATE.gachaHistory=STATE.gachaHistory.slice(0,50);
     Store.save();
-    cap.classList.remove('spinning');cap.classList.add('popping');
+    cap.className='gacha-egg cracking';
     setTimeout(()=>{
-      cap.classList.remove('popping');
-      document.getElementById('gs-gacha-res-emoji').textContent=picked.emoji;
-      document.getElementById('gs-gacha-res-name').textContent=picked.name;
-      document.getElementById('gs-gacha-result').classList.remove('hidden');
-      document.getElementById('gs-gacha-coin-bal').textContent=STATE.coins;
-      gsUpdateGachaBtn(); App.updateStatsBar(); AudioMgr.coin();
-      gsSpawnConfetti();
-    },300);
+      cap.style.display='none';
+      burst.textContent=picked.emoji;
+      burst.className='gacha-prize-burst popping';
+      setTimeout(()=>{
+        document.getElementById('gs-gacha-res-emoji').textContent=picked.emoji;
+        document.getElementById('gs-gacha-res-name').textContent=picked.name;
+        document.getElementById('gs-gacha-result').classList.remove('hidden');
+        document.getElementById('gs-gacha-coin-bal').textContent=STATE.coins;
+        gsUpdateGachaBtn(); App.updateStatsBar(); AudioMgr.coin();
+        gsSpawnConfetti();
+      },500);
+    },400);
   },1800);
 }
 function gsSpawnConfetti(){

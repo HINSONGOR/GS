@@ -419,18 +419,15 @@
             <div class="gacha-modal-title">🎰 獎品扭蛋機</div>
             <div class="gacha-bal">🪙 <span id="gs-gacha-coin-bal">0</span></div>
         </div>
-        <div class="gacha-machine-area">
-            <div class="gacha-machine-body">
-                <div class="gacha-window">
-                    <div class="gacha-capsule" id="gs-gacha-capsule"></div>
-                </div>
-            </div>
-            <button class="gacha-spin-btn" id="gs-gacha-spin-btn" onclick="gsSpinGacha()">
-                <span class="gsb-icon">🎰</span>
-                <span class="gsb-text">扭蛋！</span>
-                <span class="gsb-cost">-300 🪙</span>
-            </button>
+        <div class="gacha-egg-stage">
+            <div class="gacha-egg" id="gs-gacha-capsule"></div>
+            <div class="gacha-prize-burst" id="gs-gacha-prize-burst"></div>
         </div>
+        <button class="gacha-spin-btn" id="gs-gacha-spin-btn" onclick="gsSpinGacha()">
+            <span class="gsb-icon">🥚</span>
+            <span class="gsb-text">扭蛋！</span>
+            <span class="gsb-cost">-300 🪙</span>
+        </button>
         <div class="gacha-result hidden" id="gs-gacha-result">
             <div class="gacha-res-emoji" id="gs-gacha-res-emoji"></div>
             <div class="gacha-res-name" id="gs-gacha-res-name"></div>
