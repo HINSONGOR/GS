@@ -2936,16 +2936,15 @@ function gsBuildDailyLog(){
   return dates.map(date=>{
     const entries=byDate[date];
     const totalSecs=entries.reduce((s,e)=>s+e.secs,0);
-    const totalMins=Math.floor(totalSecs/60);
+    const gsTime=s=>s>=3600?`${Math.floor(s/3600)}小時${Math.floor((s%3600)/60)}分鐘`:s>=60?`${Math.floor(s/60)}分鐘`:`${s}秒`;
     const d=new Date(date+'T00:00:00');
     const label=`${d.getMonth()+1}月${d.getDate()}日（星期${dow[d.getDay()]}）`;
     const tags=entries.map(e=>{
       const nm=TNAMES[e.module]||e.module;
-      const qt=QTYPES[e.qtype]||e.qtype;
-      const t=e.secs>=60?`${Math.floor(e.secs/60)}分鐘`:e.secs>0?`${e.secs}秒`:'';
-      return `<span class="daily-tag">${nm} ${e.correct}/${e.total}（${e.pct}%）· ${t}</span>`;
+      const t=e.secs>0?gsTime(e.secs):'';
+      return `<span class="daily-tag">${nm} ${e.correct}/${e.total}（${e.pct}%）${t?'· '+t:''}</span>`;
     }).join('');
-    return `<div class="daily-log-row"><div class="daily-log-date">${label}</div><div class="daily-log-tags">${tags}</div>${totalMins>0?`<div class="daily-log-total">共用 ${totalMins}分鐘</div>`:''}</div>`;
+    return `<div class="daily-log-row"><div class="daily-log-date">${label}</div><div class="daily-log-tags">${tags}</div><div class="daily-log-total">共用 ${gsTime(totalSecs)}</div></div>`;
   }).join('');
 }
 
