@@ -2640,6 +2640,10 @@ const Report = {
       </div>`;
     });
 
+    // Check-in widget
+    const checkinEl = document.getElementById('repCheckin');
+    if (checkinEl) checkinEl.innerHTML = gsBuildCheckinWidget();
+
     // Daily log — last 14 days
     const logEl = document.getElementById('repDailyLog');
     if (logEl) {
@@ -2920,6 +2924,45 @@ const App = {
     return a;
   }
 };
+
+// ============ CHECKIN WIDGET ============
+function gsBuildCheckinWidget(){
+  const ci=STATE.studyCheckIn||{streak:0,maxStreak:0,history:[]};
+  const qualSet=new Set(ci.history||[]);
+  const today=new Date().toISOString().slice(0,10);
+  const cells=[];
+  for(let i=34;i>=0;i--){
+    const d=new Date(Date.now()-i*86400000);
+    const ds=d.toISOString().slice(0,10);
+    const dayNum=d.getDate();
+    const isToday=ds===today;
+    let cls=qualSet.has(ds)?'ci-cell ci-done':'ci-cell ci-miss';
+    if(isToday) cls+=' ci-today';
+    cells.push(`<div class="${cls}" title="${ds}">${dayNum}</div>`);
+  }
+  const sc=ci.streak||0;
+  const streakColor=sc>=30?'#FFD700':sc>=14?'#FF9800':sc>=7?'#4CAF50':'#64B5F6';
+  const MS=[7,14,30,60,100]; const next=MS.find(m=>m>sc)||100; const left=next-sc;
+  const total=(ci.history||[]).length;
+  return `<h3 style="margin-bottom:10px">🔥 學習打卡記錄</h3>
+  <div class="ci-widget">
+    <div class="ci-header">
+      <div class="ci-streak-box">
+        <div class="ci-streak-num" style="color:${streakColor}">${sc}</div>
+        <div class="ci-streak-lbl">🔥 連續打卡天數</div>
+        <div class="ci-streak-sub">最高紀錄 ${ci.maxStreak||0} 天 &nbsp;·&nbsp; 累計 ${total} 天</div>
+        ${sc<100?`<div class="ci-streak-sub">再 ${left} 天達 ${next} 天里程碑 🎯</div>`:'<div class="ci-streak-sub">🎊 已達百日里程碑！</div>'}
+      </div>
+      <div class="ci-req">每日完成<br><strong>20分鐘</strong>學習<br>即算打卡</div>
+    </div>
+    <div class="ci-calendar">${cells.join('')}</div>
+    <div class="ci-legend">
+      <span class="ci-leg-item"><span class="ci-leg-dot ci-done"></span>打卡成功</span>
+      <span class="ci-leg-item"><span class="ci-leg-dot ci-miss"></span>未達標</span>
+      <span class="ci-leg-item"><span class="ci-leg-dot" style="outline:2px solid var(--hp-gold);outline-offset:-2px"></span>今天</span>
+    </div>
+  </div>`;
+}
 
 // ============ DAILY LOG (parent view) ============
 function gsBuildDailyLog(){
