@@ -2870,8 +2870,7 @@ const App = {
       STATE.parentUnlocked = true;
       this.closeModal('modal-parent-login');
       document.getElementById('parentPw').value = '';
-      ParentMode.tab('stats');
-      this.showScreen('screen-parent');
+      gsShowParent();
     } else {
       this.toast('密碼錯誤！'); AudioMgr.wrong();
     }
@@ -2921,6 +2920,97 @@ const App = {
     return a;
   }
 };
+
+// ============ PARENT MODE (single-page) ============
+function gsShowParent(){
+  App.showScreen('screen-parent');
+  const body=document.getElementById('gs-parent-body');
+  const ci=STATE.studyCheckIn||{};
+  const streak=ci.streak||0;
+  const history=ci.history||[];
+  const today=new Date().toISOString().slice(0,10);
+  const todaySecs=(STATE.dailyLog||[]).filter(r=>r.date===today).reduce((s,r)=>s+r.secs,0);
+  const todayMins=Math.floor(todaySecs/60);
+  const total=STATE.stats.totalAnswered||0;
+  const acc=total>0?Math.round(STATE.stats.totalCorrect/total*100)+'%':'—';
+  const MODS=['6.1','6.2','6.3','6.4','6.5','6.6'];
+  const NAMES={'6.1':'6.1 處變不驚','6.2':'6.2 科技天地','6.3':'6.3 中國的變遷','6.4':'6.4 香港特別行政區','6.5':'6.5 生物世界','6.6':'6.6 放眼世界'};
+  const mods=MODS.map(k=>[k,STATE.stats.byModule[k]||{answered:0,correct:0}]);
+  const weak=mods.filter(([k,st])=>st.answered>=3&&st.correct/st.answered<0.6);
+  const histSet=new Set(history);
+  const ciCells=[];
+  for(let i=34;i>=0;i--){const d=new Date(today+'T00:00:00');d.setDate(d.getDate()-i);const ds=d.toISOString().slice(0,10);const cls=ds===today?'ci-today':histSet.has(ds)?'ci-done':'ci-miss';ciCells.push(`<div class="ci-cell ${cls}" title="${ds}"></div>`);}
+  const prizes=gsGetPrizes();
+  const tw=prizes.reduce((s,p)=>s+p.weight,0);
+  const cost=STATE.gachaCost||300;
+  body.innerHTML=`
+    <div class="parent-card">
+      <div class="parent-card-title">📊 總體學習情況</div>
+      <div class="module-report-row"><div class="mod-report-name">學生</div><div style="color:#E8F5E9;font-weight:700">${STATE.playerName||'（未設定）'}</div></div>
+      <div class="module-report-row"><div class="mod-report-name">總答題</div><div>${total} 題</div></div>
+      <div class="module-report-row"><div class="mod-report-name">正確率</div><div>${acc}</div></div>
+      <div class="module-report-row"><div class="mod-report-name">等級</div><div>Level ${STATE.level||1}</div></div>
+      <div class="module-report-row"><div class="mod-report-name">連續打卡</div><div style="color:#FF8A65">${streak} 天 🔥</div></div>
+      <div class="module-report-row"><div class="mod-report-name">金幣</div><div style="display:flex;align-items:center;gap:10px"><span style="color:#FFD54F">🪙 ${STATE.coins}</span><button onclick="if(confirm('確定清零金幣？')){STATE.coins=0;Store.save();gsShowParent();}" style="padding:3px 10px;border-radius:6px;border:none;background:#E53935;color:#fff;font-size:0.8rem;cursor:pointer">清零</button></div></div>
+    </div>
+    <div class="parent-card">
+      <div class="parent-card-title">📈 各課題表現</div>
+      ${mods.map(([k,st])=>{const p=st.answered>0?Math.round(st.correct/st.answered*100):0;const c=p>=80?'#4CAF50':p>=60?'#FFD54F':'#EF5350';return`<div class="module-report-row"><div class="mod-report-name">${NAMES[k]}</div><div class="mod-report-bar-wrap"><div class="mod-report-bar" style="width:${p}%;background:${c}"></div></div><div class="mod-report-pct">${st.answered>0?p+'%':'—'}</div></div>`;}).join('')}
+    </div>
+    ${weak.length>0?`<div class="parent-card"><div class="parent-card-title">⚠️ 需要加強的範疇</div>${weak.map(([k,st])=>`<div class="weakness-item"><span class="weakness-icon">📌</span><span class="weakness-name">${NAMES[k]}</span><span class="weakness-acc">${Math.round(st.correct/st.answered*100)}%</span></div>`).join('')}</div>`:''}
+    <div class="parent-card">
+      <div class="parent-card-title">🗓️ 學習打卡記錄</div>
+      <div class="ci-widget">
+        <div class="ci-header">
+          <div><div class="ci-streak-num" style="color:${streak>=7?'#FFD700':streak>=3?'#FF8A65':'#80CBC4'}">${streak}</div><div class="ci-streak-lbl">連續打卡天數</div><div class="ci-streak-sub">今日 ${todayMins}/20 分鐘${todaySecs>=1200?' ✅':''}</div></div>
+          <div class="ci-req">每日 20 分鐘達標即打卡<br>最高記錄：${ci.maxStreak||0} 天<br>累計：${history.length} 天</div>
+        </div>
+        <div class="ci-calendar">${ciCells.join('')}</div>
+        <div class="ci-legend"><div class="ci-leg-item"><div class="ci-leg-dot ci-done"></div>已打卡</div><div class="ci-leg-item"><div class="ci-leg-dot ci-today"></div>今日</div><div class="ci-leg-item"><div class="ci-leg-dot ci-miss"></div>未打卡</div></div>
+      </div>
+    </div>
+    <div class="parent-card">
+      <div class="parent-card-title">🎰 扭蛋機設定</div>
+      <div class="gacha-cfg-cost">每次費用：<input id="gs-gacha-cost-input" type="number" min="50" max="2000" value="${cost}" class="gacha-input-sm"> 金幣 <button onclick="gsGachaCost()" class="gacha-save-btn">儲存</button></div>
+      <div style="margin:10px 0 6px;font-size:0.85rem;color:#aaa">獎品池（${prizes.length} 項）</div>
+      ${prizes.map(p=>{const pct=tw>0?Math.round(p.weight/tw*100):0;return`<div class="gacha-cfg-row"><span class="gacha-cfg-emoji">${p.emoji}</span><span class="gacha-cfg-name">${p.name}</span><span class="gacha-cfg-pct">${pct}%</span><button onclick="gsDeletePrize(${p.id})" class="gacha-del-btn">🗑️</button></div>`;}).join('')}
+      <div style="margin:10px 0 6px;font-size:0.85rem;color:#aaa">新增獎品</div>
+      <div class="gacha-add-row"><input id="gs-np-emoji" type="text" placeholder="📦" maxlength="4" class="gacha-input-emoji"><input id="gs-np-name" type="text" placeholder="獎品名稱" class="gacha-input-name"><input id="gs-np-weight" type="number" min="1" max="999" placeholder="權重" value="25" class="gacha-input-sm"><button onclick="gsAddPrize()" class="gacha-save-btn">新增</button></div>
+      <p style="font-size:0.75rem;color:#888;margin-top:6px">權重越高抽中機率越大，系統自動換算成百分比。機率只在此頁顯示，學生看不到。</p>
+    </div>
+    <div class="parent-card">
+      <div class="parent-card-title">📤 上載題目</div>
+      <p class="upload-hint">支援：PDF · Word (.docx) · 圖片 (JPG/PNG)<br>系統會自動識別文字並加入題庫</p>
+      <div class="upload-drop" id="uploadDrop" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="ParentMode.drop(event)">
+        <div class="upload-drop-icon">📂</div><p>拖放檔案到此處</p><p>— 或 —</p>
+        <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.bmp" multiple style="display:none" onchange="ParentMode.handleFiles(this.files)">
+        <button class="pixel-btn" onclick="document.getElementById('fileInput').click()">選擇檔案</button>
+      </div>
+      <div id="uploadProgress" class="upload-progress" style="display:none"><div class="up-bar-outer"><div class="up-bar-fill" id="upBarFill"></div></div><div id="upStatus">處理中⋯</div></div>
+      <div id="extractedArea" style="display:none" class="extracted-area"><h4>識別文字：</h4><textarea id="extractedTA" rows="6" class="pixel-input"></textarea><button class="pixel-btn gold" onclick="ParentMode.addAsQuestion()">➕ 作為題目加入</button></div>
+      <h4 style="margin:16px 0 8px;color:var(--hp-gold)">✏️ 手動新增題目</h4>
+      <div class="form-row"><label>課題：</label><select id="nqModule" class="pixel-select"><option value="6.1">6.1 處變不驚</option><option value="6.2">6.2 科技天地</option><option value="6.3">6.3 中國的變遷</option><option value="6.4">6.4 香港特別行政區</option><option value="6.5">6.5 生物世界</option><option value="6.6">6.6 放眼世界</option></select></div>
+      <div class="form-row"><label>題型：</label><select id="nqType" class="pixel-select" onchange="ParentMode.updateForm()"><option value="mc">選擇題</option><option value="fill">填充題</option><option value="short">簡答題</option><option value="analysis">分析題</option><option value="classify">分類題</option><option value="scenario">生活情景題</option></select></div>
+      <div class="form-row"><label>題目：</label><textarea id="nqText" rows="3" class="pixel-input" placeholder="輸入題目⋯"></textarea></div>
+      <div id="nqMcSection">
+        <div class="form-row"><label>選項A：</label><input type="text" id="nqA" class="pixel-input" placeholder="選項A"></div>
+        <div class="form-row"><label>選項B：</label><input type="text" id="nqB" class="pixel-input" placeholder="選項B"></div>
+        <div class="form-row"><label>選項C：</label><input type="text" id="nqC" class="pixel-input" placeholder="選項C"></div>
+        <div class="form-row"><label>選項D：</label><input type="text" id="nqD" class="pixel-input" placeholder="選項D"></div>
+        <div class="form-row"><label>正確答案：</label><select id="nqMcAns" class="pixel-select"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
+      </div>
+      <div id="nqTextSection" style="display:none"><div class="form-row"><label>正確答案：</label><textarea id="nqTextAns" rows="2" class="pixel-input" placeholder="輸入正確答案⋯"></textarea></div></div>
+      <div class="form-row"><label>小老師講解：</label><textarea id="nqExplain" rows="3" class="pixel-input" placeholder="解題說明⋯"></textarea></div>
+      <button class="pixel-btn gold" onclick="ParentMode.saveQ()">💾 儲存題目</button>
+    </div>
+    <div class="parent-card">
+      <div class="parent-card-title">⚙️ 管理題庫</div>
+      <div class="form-row"><label>篩選：</label><select id="manageFilter" class="pixel-select" onchange="ParentMode.renderManage()"><option value="all">全部</option><option value="custom">自訂題目</option><option value="6.1">6.1 處變不驚</option><option value="6.2">6.2 科技天地</option><option value="6.3">6.3 中國的變遷</option><option value="6.4">6.4 香港特別行政區</option><option value="6.5">6.5 生物世界</option><option value="6.6">6.6 放眼世界</option></select></div>
+      <div id="manageList"></div>
+    </div>
+  `;
+  ParentMode.renderManage();
+}
 
 // ============ STUDY CHECK-IN ============
 function updateStudyCheckin(){
@@ -3044,11 +3134,11 @@ function gsAddPrize(){
   const prizes=gsGetPrizes();
   const maxId=prizes.reduce((m,p)=>Math.max(m,p.id||0),0);
   STATE.gachaPrizes=[...prizes,{id:maxId+1,emoji,name,weight}];
-  Store.save(); ParentMode.tab('gacha');
+  Store.save(); gsShowParent();
 }
 function gsDeletePrize(id){
   STATE.gachaPrizes=gsGetPrizes().filter(p=>p.id!==id);
-  Store.save(); ParentMode.tab('gacha');
+  Store.save(); gsShowParent();
 }
 function gsGachaCost(){
   const v=parseInt(document.getElementById('gs-gacha-cost-input').value)||300;

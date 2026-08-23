@@ -913,24 +913,50 @@ textarea.pixel-input { resize: vertical; }
 /* ==========================================
    PARENT MODE
    ========================================== */
-.parent-tabs-row {
-  display: flex; gap: 0;
-  border-bottom: 2px solid var(--hp-gold);
-  background: rgba(10,1,24,0.8);
+.parent-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-.ptab {
-  flex: 1; padding: 12px;
-  background: none; border: none;
-  color: rgba(245,230,200,0.5);
-  font-family: var(--font-main);
-  font-size: 13px; font-weight: 700;
-  cursor: pointer;
-  border-bottom: 3px solid transparent;
-  transition: all 0.2s;
+.parent-card {
+  background: rgba(20,5,40,0.8);
+  border: 2px solid var(--hp-gold);
+  border-radius: 8px;
+  padding: 14px;
 }
-.ptab.active { color: var(--hp-gold2); border-bottom-color: var(--hp-gold); }
-.ptab:hover { color: var(--hp-parchment); }
-.ptab-content { padding: 14px; }
+.parent-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--hp-gold);
+  margin-bottom: 10px;
+}
+.weakness-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 0.88rem;
+}
+.weakness-icon { font-size: 1.1rem; }
+.weakness-name { flex: 1; color: var(--hp-parchment); }
+.weakness-acc { color: #EF5350; font-weight: 700; }
+.ci-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.ci-streak-num { font-size: 2.5rem; font-weight: 900; line-height: 1; }
+.ci-streak-lbl { font-size: 0.75rem; color: rgba(245,230,200,0.7); margin-top: 2px; }
+.ci-streak-sub { font-size: 0.78rem; color: rgba(245,230,200,0.6); margin-top: 4px; }
+.ci-req { font-size: 0.78rem; color: rgba(245,230,200,0.55); text-align: right; line-height: 1.5; }
+.ci-calendar { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; margin-bottom: 8px; }
+.ci-cell { aspect-ratio: 1; border-radius: 4px; background: rgba(255,255,255,0.06); }
+.ci-done { background: #2d6a2d; }
+.ci-miss { background: rgba(255,255,255,0.06); }
+.ci-today { background: rgba(255,255,255,0.06); outline: 2px solid var(--hp-gold); }
+.ci-legend { display: flex; gap: 12px; margin-top: 4px; }
+.ci-leg-item { display: flex; align-items: center; gap: 4px; font-size: 0.72rem; color: rgba(245,230,200,0.6); }
+.ci-leg-dot { width: 10px; height: 10px; border-radius: 2px; }
+.ci-leg-dot.ci-done { background: #2d6a2d; }
+.ci-leg-dot.ci-today { background: transparent; outline: 2px solid var(--hp-gold); }
+.ci-leg-dot.ci-miss { background: rgba(255,255,255,0.06); }
 
 .p-stats-card { background: rgba(20,5,40,0.8); padding: 16px; }
 .p-stats-card h3 { color: var(--hp-gold); margin-bottom: 14px; }
