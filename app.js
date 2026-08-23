@@ -2921,6 +2921,34 @@ const App = {
   }
 };
 
+// ============ DAILY LOG (parent view) ============
+function gsBuildDailyLog(){
+  const log=STATE.dailyLog||[];
+  if(!log.length) return '<div style="text-align:center;color:rgba(245,230,200,0.4);font-size:0.82rem;padding:10px 0">完成練習後會自動記錄每日活動 📋</div>';
+  const TNAMES={'6.1':'6.1 處變不驚','6.2':'6.2 科技天地','6.3':'6.3 中國的變遷','6.4':'6.4 香港特別行政區','6.5':'6.5 生物世界','6.6':'6.6 放眼世界'};
+  const QTYPES={mc:'選擇題',fill:'填充題',short:'簡答題',analysis:'分析題',classify:'分類題',scenario:'情景題',match:'配對題',order:'排序題'};
+  const byDate={};
+  [...log].reverse().forEach(e=>{if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e);});
+  const cutDate=new Date(Date.now()-14*86400000).toISOString().slice(0,10);
+  const dates=Object.keys(byDate).filter(d=>d>=cutDate).sort((a,b)=>b.localeCompare(a));
+  const dow=['日','一','二','三','四','五','六'];
+  if(!dates.length) return '<div style="color:rgba(245,230,200,0.4);font-size:0.82rem">最近14日沒有紀錄。</div>';
+  return dates.map(date=>{
+    const entries=byDate[date];
+    const totalSecs=entries.reduce((s,e)=>s+e.secs,0);
+    const totalMins=Math.floor(totalSecs/60);
+    const d=new Date(date+'T00:00:00');
+    const label=`${d.getMonth()+1}月${d.getDate()}日（星期${dow[d.getDay()]}）`;
+    const tags=entries.map(e=>{
+      const nm=TNAMES[e.module]||e.module;
+      const qt=QTYPES[e.qtype]||e.qtype;
+      const t=e.secs>=60?`${Math.floor(e.secs/60)}分鐘`:e.secs>0?`${e.secs}秒`:'';
+      return `<span class="daily-tag">${nm} ${e.correct}/${e.total}（${e.pct}%）· ${t}</span>`;
+    }).join('');
+    return `<div class="daily-log-row"><div class="daily-log-date">${label}</div><div class="daily-log-tags">${tags}</div>${totalMins>0?`<div class="daily-log-total">共用 ${totalMins}分鐘</div>`:''}</div>`;
+  }).join('');
+}
+
 // ============ PARENT MODE (single-page) ============
 function gsShowParent(){
   App.showScreen('screen-parent');
@@ -2979,37 +3007,10 @@ function gsShowParent(){
       <p style="font-size:0.75rem;color:#888;margin-top:6px">權重越高抽中機率越大，系統自動換算成百分比。機率只在此頁顯示，學生看不到。</p>
     </div>
     <div class="parent-card">
-      <div class="parent-card-title">📤 上載題目</div>
-      <p class="upload-hint">支援：PDF · Word (.docx) · 圖片 (JPG/PNG)<br>系統會自動識別文字並加入題庫</p>
-      <div class="upload-drop" id="uploadDrop" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="ParentMode.drop(event)">
-        <div class="upload-drop-icon">📂</div><p>拖放檔案到此處</p><p>— 或 —</p>
-        <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.bmp" multiple style="display:none" onchange="ParentMode.handleFiles(this.files)">
-        <button class="pixel-btn" onclick="document.getElementById('fileInput').click()">選擇檔案</button>
-      </div>
-      <div id="uploadProgress" class="upload-progress" style="display:none"><div class="up-bar-outer"><div class="up-bar-fill" id="upBarFill"></div></div><div id="upStatus">處理中⋯</div></div>
-      <div id="extractedArea" style="display:none" class="extracted-area"><h4>識別文字：</h4><textarea id="extractedTA" rows="6" class="pixel-input"></textarea><button class="pixel-btn gold" onclick="ParentMode.addAsQuestion()">➕ 作為題目加入</button></div>
-      <h4 style="margin:16px 0 8px;color:var(--hp-gold)">✏️ 手動新增題目</h4>
-      <div class="form-row"><label>課題：</label><select id="nqModule" class="pixel-select"><option value="6.1">6.1 處變不驚</option><option value="6.2">6.2 科技天地</option><option value="6.3">6.3 中國的變遷</option><option value="6.4">6.4 香港特別行政區</option><option value="6.5">6.5 生物世界</option><option value="6.6">6.6 放眼世界</option></select></div>
-      <div class="form-row"><label>題型：</label><select id="nqType" class="pixel-select" onchange="ParentMode.updateForm()"><option value="mc">選擇題</option><option value="fill">填充題</option><option value="short">簡答題</option><option value="analysis">分析題</option><option value="classify">分類題</option><option value="scenario">生活情景題</option></select></div>
-      <div class="form-row"><label>題目：</label><textarea id="nqText" rows="3" class="pixel-input" placeholder="輸入題目⋯"></textarea></div>
-      <div id="nqMcSection">
-        <div class="form-row"><label>選項A：</label><input type="text" id="nqA" class="pixel-input" placeholder="選項A"></div>
-        <div class="form-row"><label>選項B：</label><input type="text" id="nqB" class="pixel-input" placeholder="選項B"></div>
-        <div class="form-row"><label>選項C：</label><input type="text" id="nqC" class="pixel-input" placeholder="選項C"></div>
-        <div class="form-row"><label>選項D：</label><input type="text" id="nqD" class="pixel-input" placeholder="選項D"></div>
-        <div class="form-row"><label>正確答案：</label><select id="nqMcAns" class="pixel-select"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
-      </div>
-      <div id="nqTextSection" style="display:none"><div class="form-row"><label>正確答案：</label><textarea id="nqTextAns" rows="2" class="pixel-input" placeholder="輸入正確答案⋯"></textarea></div></div>
-      <div class="form-row"><label>小老師講解：</label><textarea id="nqExplain" rows="3" class="pixel-input" placeholder="解題說明⋯"></textarea></div>
-      <button class="pixel-btn gold" onclick="ParentMode.saveQ()">💾 儲存題目</button>
-    </div>
-    <div class="parent-card">
-      <div class="parent-card-title">⚙️ 管理題庫</div>
-      <div class="form-row"><label>篩選：</label><select id="manageFilter" class="pixel-select" onchange="ParentMode.renderManage()"><option value="all">全部</option><option value="custom">自訂題目</option><option value="6.1">6.1 處變不驚</option><option value="6.2">6.2 科技天地</option><option value="6.3">6.3 中國的變遷</option><option value="6.4">6.4 香港特別行政區</option><option value="6.5">6.5 生物世界</option><option value="6.6">6.6 放眼世界</option></select></div>
-      <div id="manageList"></div>
+      <div class="parent-card-title">📅 每日學習紀錄 <span style="font-size:0.75rem;opacity:0.6">（最近14日）</span></div>
+      ${gsBuildDailyLog()}
     </div>
   `;
-  ParentMode.renderManage();
 }
 
 // ============ STUDY CHECK-IN ============

@@ -958,6 +958,12 @@ textarea.pixel-input { resize: vertical; }
 .ci-leg-dot.ci-done { background: #2d6a2d; }
 .ci-leg-dot.ci-today { background: transparent; outline: 2px solid var(--hp-gold); }
 .ci-leg-dot.ci-miss { background: rgba(255,255,255,0.06); }
+.daily-log-row { padding: 10px 0; border-bottom: 1px solid rgba(212,175,55,0.15); }
+.daily-log-row:last-child { border-bottom: none; }
+.daily-log-date { font-size: 0.82rem; font-weight: 700; color: var(--hp-gold); margin-bottom: 6px; }
+.daily-log-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
+.daily-tag { background: rgba(45,106,45,0.45); border: 1px solid rgba(45,106,45,0.8); border-radius: 12px; padding: 3px 9px; font-size: 0.78rem; color: var(--hp-parchment); }
+.daily-log-total { font-size: 0.78rem; color: rgba(245,230,200,0.5); text-align: right; }
 
 .p-stats-card { background: rgba(20,5,40,0.8); padding: 16px; }
 .p-stats-card h3 { color: var(--hp-gold); margin-bottom: 14px; }
