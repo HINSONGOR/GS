@@ -2364,6 +2364,7 @@ const ParentMode = {
     document.getElementById('pAcc').textContent = acc;
     document.getElementById('pLvl').textContent = STATE.level;
     document.getElementById('pLoginStreak').textContent = STATE.loginStreak;
+    document.getElementById('pCoinsDisplay').textContent = STATE.coins;
 
     const modEl = document.getElementById('pModStats');
     modEl.innerHTML = '';

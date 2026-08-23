@@ -422,6 +422,10 @@
                 <div class="p-stat"><div class="p-sn" id="pLvl">1</div><div class="p-sl">等級</div></div>
                 <div class="p-stat"><div class="p-sn" id="pLoginStreak">0</div><div class="p-sl">登入連續天</div></div>
             </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,0.1);margin-top:8px">
+                <span style="color:#FFD54F;font-size:0.9rem">🪙 金幣：<span id="pCoinsDisplay">0</span></span>
+                <button onclick="if(confirm('確定清零金幣？')){STATE.coins=0;Store.save();ParentMode.renderStats();}" style="padding:3px 12px;border-radius:6px;border:none;background:#E53935;color:#fff;font-size:0.8rem;cursor:pointer">清零</button>
+            </div>
             <h4>各課題表現：</h4>
             <div id="pModStats"></div>
             <h4>⚠️ 弱項科目：</h4>
