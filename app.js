@@ -2659,8 +2659,11 @@ const Report = {
           const dayTotal = entries.reduce((s,e)=>s+e.total,0);
           const dayCorrect = entries.reduce((s,e)=>s+e.correct,0);
           const dayPct = dayTotal>0 ? Math.round(dayCorrect/dayTotal*100) : 0;
+          const daySecs = entries.reduce((s,e)=>s+e.secs,0);
+          const dayMins = Math.floor(daySecs/60), daySecR = daySecs%60;
+          const dayTimeStr = daySecs>0 ? `⏱ ${dayMins}分${daySecR}秒` : '';
           html += `<div class="dlog-day">
-            <div class="dlog-date">📅 ${date} &nbsp;<span class="dlog-day-summary">${entries.length}次練習 · ${dayTotal}題 · 正確率${dayPct}%</span></div>`;
+            <div class="dlog-date">📅 ${date} &nbsp;<span class="dlog-day-summary">${entries.length}次練習 · ${dayTotal}題 · 正確率${dayPct}% · ${dayTimeStr}</span></div>`;
           entries.forEach(e => {
             const mins = Math.floor(e.secs/60), secs = e.secs%60;
             const timeStr = e.secs>0 ? `${mins}分${secs}秒` : '—';
