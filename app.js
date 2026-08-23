@@ -3110,7 +3110,7 @@ function gsOpenGacha(){
   cap.className='gacha-egg'; cap.style.display='none';
   document.getElementById('gs-gacha-prize-burst').className='gacha-prize-burst';
   const mach=document.getElementById('gs-gacha-machine-svg');
-  if(mach) mach.className='gacha-machine-svg';
+  if(mach) mach.classList.remove('shaking');
   App.openModal('modal-gs-gacha');
 }
 function gsUpdateGachaBtn(){
@@ -3143,7 +3143,7 @@ function gsSpinGacha(){
   const mach=document.getElementById('gs-gacha-machine-svg');
   burst.className='gacha-prize-burst';
   // Phase 1: machine shakes (0–600ms)
-  if(mach) mach.className='gacha-machine-svg shaking';
+  if(mach) mach.classList.add('shaking');
   // Phase 2: egg rolls out + wobbles (600–1600ms)
   setTimeout(()=>{ cap.style.display='block'; cap.className='gacha-egg wobbling'; },600);
   // Phase 3: egg shakes with anticipation (1600–2400ms)
