@@ -1440,7 +1440,11 @@ let STATE = {
   customQuestions: [],
   settings: { musicOn: true, volume: 0.4 },
   parentUnlocked: false,
-  dailyLog: []
+  dailyLog: [],
+  studyCheckIn: { streak:0, maxStreak:0, history:[], lastAwardDate:'' },
+  gachaPrizes: [],
+  gachaHistory: [],
+  gachaCost: 300
 };
 
 const XP_PER_LEVEL = 100;
@@ -2251,6 +2255,7 @@ const QuizEngine = {
 
     Rewards.checkBadges();
     Store.save();
+    updateStudyCheckin();
 
     // Show results
     document.getElementById('resultsTitle').textContent = pct >= 90 ? '🏆 優秀！' : pct >= 70 ? '🌟 良好！' : pct >= 50 ? '📚 繼續努力！' : '💪 加油！';
@@ -2349,6 +2354,7 @@ const ParentMode = {
     document.getElementById('ptabContent-' + name).style.display = 'block';
     if (name === 'stats') this.renderStats();
     if (name === 'manage') this.renderManage();
+    if (name === 'gacha') this.renderGacha();
   },
 
   renderStats() {
@@ -2471,6 +2477,41 @@ const ParentMode = {
     Store.save();
     this.renderManage();
     App.toast('🗑️ 已刪除題目。');
+  },
+
+  renderGacha() {
+    const prizes=gsGetPrizes();
+    const total=prizes.reduce((s,p)=>s+p.weight,0);
+    const cost=STATE.gachaCost||300;
+    const ci=STATE.studyCheckIn||{};
+    document.getElementById('ptabContent-gacha').innerHTML=`
+      <div class="manage-card pixel-border">
+        <h3>🔥 學習打卡狀態</h3>
+        <div class="p-stat-grid">
+          <div class="p-stat"><div class="p-sn">${ci.streak||0}</div><div class="p-sl">連續打卡天</div></div>
+          <div class="p-stat"><div class="p-sn">${ci.maxStreak||0}</div><div class="p-sl">最高紀錄</div></div>
+          <div class="p-stat"><div class="p-sn">${(ci.history||[]).length}</div><div class="p-sl">累計天數</div></div>
+          <div class="p-stat"><div class="p-sn">${STATE.coins}</div><div class="p-sl">🪙 金幣</div></div>
+        </div>
+        <p style="font-size:0.8rem;color:#aaa;margin-top:6px">每日學習達 20 分鐘自動打卡並發放金幣（連續天數越多獎勵越高）</p>
+      </div>
+      <div class="manage-card pixel-border">
+        <h3>🎰 扭蛋機設定</h3>
+        <div class="gacha-cfg-cost">每次費用：
+          <input id="gs-gacha-cost-input" type="number" min="50" max="2000" value="${cost}" class="gacha-input-sm"> 金幣
+          <button onclick="gsGachaCost()" class="gacha-save-btn">儲存</button>
+        </div>
+        <div style="margin:10px 0 6px;font-size:0.85rem;color:#aaa">獎品池（${prizes.length} 項）</div>
+        ${prizes.map(p=>{const pct=total>0?Math.round(p.weight/total*100):0;return`<div class="gacha-cfg-row"><span class="gacha-cfg-emoji">${p.emoji}</span><span class="gacha-cfg-name">${p.name}</span><span class="gacha-cfg-pct">${pct}%</span><button onclick="gsDeletePrize(${p.id})" class="gacha-del-btn">🗑️</button></div>`;}).join('')}
+        <div style="margin:10px 0 6px;font-size:0.85rem;color:#aaa">新增獎品</div>
+        <div class="gacha-add-row">
+          <input id="gs-np-emoji" type="text" placeholder="📦" maxlength="4" class="gacha-input-emoji">
+          <input id="gs-np-name" type="text" placeholder="獎品名稱" class="gacha-input-name">
+          <input id="gs-np-weight" type="number" min="1" max="999" placeholder="權重" value="25" class="gacha-input-sm">
+          <button onclick="gsAddPrize()" class="gacha-save-btn">新增</button>
+        </div>
+        <p style="font-size:0.75rem;color:#888;margin-top:6px">權重越高抽中機率越大，系統自動換算成百分比。機率只在此頁顯示，學生看不到。</p>
+      </div>`;
   },
 
   drop(e) {
@@ -2876,6 +2917,140 @@ const App = {
     return a;
   }
 };
+
+// ============ STUDY CHECK-IN ============
+function updateStudyCheckin(){
+  const log=STATE.dailyLog||[];
+  const byDate={};
+  log.forEach(r=>{byDate[r.date]=(byDate[r.date]||0)+r.secs;});
+  const qualDates=Object.keys(byDate).filter(d=>byDate[d]>=1200).sort();
+  const qualSet=new Set(qualDates);
+  function streakFrom(ds){let n=0;let d=new Date(ds+'T00:00:00');while(qualSet.has(d.toISOString().slice(0,10))){n++;d.setDate(d.getDate()-1);}return n;}
+  const today=new Date().toISOString().slice(0,10);
+  const yest=new Date(Date.now()-86400000).toISOString().slice(0,10);
+  const streak=qualSet.has(today)?streakFrom(today):streakFrom(yest);
+  const prev=STATE.studyCheckIn||{};
+  const prevStreak=prev.streak||0;
+  const prevAward=prev.lastAwardDate||'';
+  STATE.studyCheckIn={streak,maxStreak:Math.max(streak,prev.maxStreak||0),history:qualDates,lastAwardDate:prevAward};
+  if(qualSet.has(today)&&prevAward!==today){
+    const coins=streak>=7?20:streak>=3?12:8;
+    const xp=streak>=7?50:streak>=3?30:20;
+    Rewards.addCoins(coins); Rewards.addXP(xp);
+    STATE.studyCheckIn.lastAwardDate=today;
+    Store.save();
+    setTimeout(()=>showCheckinToastGS(coins,xp,streak),400);
+  }
+  const MS=[7,14,30,60,100];
+  if(MS.includes(streak)&&streak>prevStreak) setTimeout(()=>alert(`🔥 常識打卡 ${streak} 天！繼續加油！`),1200);
+}
+function showCheckinToastGS(coins,xp,streak){
+  const t=document.createElement('div');
+  t.className='gs-checkin-toast';
+  t.innerHTML=`<div class="gsct-title">🎉 打卡成功！今日已達 20 分鐘</div>
+    <div class="gsct-rewards"><span>+${xp} XP</span><span>+${coins} 🪙</span>${streak>=3?`<span>🔥 ${streak}天</span>`:''}</div>`;
+  document.body.appendChild(t);
+  setTimeout(()=>t.classList.add('gsct-show'),50);
+  setTimeout(()=>{t.classList.remove('gsct-show');setTimeout(()=>t.remove(),400);},3500);
+}
+
+// ============ GACHA MACHINE ============
+const GS_DEFAULT_PRIZES=[
+  {id:1,emoji:'🪙',name:'$5 零用錢',weight:60},
+  {id:2,emoji:'💵',name:'$20 零用錢',weight:25},
+  {id:3,emoji:'🏪',name:'超市 $100',weight:10},
+  {id:4,emoji:'🎮',name:'玩遊戲一小時',weight:25},
+  {id:5,emoji:'🛍️',name:'拼多多 $20 禮品',weight:25},
+];
+function gsGetPrizes(){return(STATE.gachaPrizes&&STATE.gachaPrizes.length)?STATE.gachaPrizes:GS_DEFAULT_PRIZES;}
+
+function gsOpenGacha(){
+  document.getElementById('gs-gacha-coin-bal').textContent=STATE.coins;
+  gsUpdateGachaBtn();
+  gsSwitchTab('pool');
+  document.getElementById('gs-gacha-result').classList.add('hidden');
+  const cap=document.getElementById('gs-gacha-capsule');
+  cap.classList.remove('spinning','popping');
+  App.openModal('modal-gs-gacha');
+}
+function gsUpdateGachaBtn(){
+  const btn=document.getElementById('gs-gacha-spin-btn');
+  if(!btn)return;
+  const cost=STATE.gachaCost||300;
+  if(STATE.coins<cost){btn.disabled=true;btn.innerHTML=`<span class="gsb-icon">🪙</span><span class="gsb-text">金幣不足</span><span class="gsb-cost">需 ${cost} 🪙</span>`;}
+  else{btn.disabled=false;btn.innerHTML=`<span class="gsb-icon">🎰</span><span class="gsb-text">扭蛋！</span><span class="gsb-cost">-${cost} 🪙</span>`;}
+}
+function gsSwitchTab(tab){
+  document.getElementById('gstab-pool').classList.toggle('active',tab==='pool');
+  document.getElementById('gstab-hist').classList.toggle('active',tab==='hist');
+  const content=document.getElementById('gs-gacha-tab-content');
+  if(tab==='pool'){
+    const prizes=gsGetPrizes();
+    content.innerHTML=prizes.map(p=>`<div class="gacha-pool-row"><span class="gpr-emoji">${p.emoji}</span><span class="gpr-name">${p.name}</span></div>`).join('');
+  } else {
+    const hist=STATE.gachaHistory||[];
+    if(!hist.length){content.innerHTML='<div class="gacha-no-hist">尚未抽過獎品 🎰</div>';return;}
+    content.innerHTML=hist.slice(0,20).map(h=>`<div class="gacha-hist-row"><span class="ghr-emoji">${h.emoji}</span><span class="ghr-name">${h.name}</span><span class="ghr-date">${h.date}</span></div>`).join('');
+  }
+}
+function gsSpinGacha(){
+  const cost=STATE.gachaCost||300;
+  if(STATE.coins<cost)return;
+  document.getElementById('gs-gacha-spin-btn').disabled=true;
+  document.getElementById('gs-gacha-result').classList.add('hidden');
+  const cap=document.getElementById('gs-gacha-capsule');
+  cap.classList.add('spinning');
+  setTimeout(()=>{
+    const prizes=gsGetPrizes();
+    const total=prizes.reduce((s,p)=>s+p.weight,0);
+    let r=Math.random()*total; let picked=prizes[0];
+    for(const p of prizes){r-=p.weight;if(r<=0){picked=p;break;}}
+    STATE.coins-=cost;
+    STATE.gachaHistory=STATE.gachaHistory||[];
+    STATE.gachaHistory.unshift({date:new Date().toISOString().slice(0,10),emoji:picked.emoji,name:picked.name,coins:cost});
+    if(STATE.gachaHistory.length>50)STATE.gachaHistory=STATE.gachaHistory.slice(0,50);
+    Store.save();
+    cap.classList.remove('spinning');cap.classList.add('popping');
+    setTimeout(()=>{
+      cap.classList.remove('popping');
+      document.getElementById('gs-gacha-res-emoji').textContent=picked.emoji;
+      document.getElementById('gs-gacha-res-name').textContent=picked.name;
+      document.getElementById('gs-gacha-result').classList.remove('hidden');
+      document.getElementById('gs-gacha-coin-bal').textContent=STATE.coins;
+      gsUpdateGachaBtn(); App.updateStatsBar(); AudioMgr.coin();
+      gsSpawnConfetti();
+    },300);
+  },1800);
+}
+function gsSpawnConfetti(){
+  const colors=['#FFD700','#FF6B6B','#4CAF50','#64B5F6','#CE93D8'];
+  const modal=document.getElementById('modal-gs-gacha');
+  for(let i=0;i<28;i++){
+    const dot=document.createElement('div');
+    dot.className='confetti-dot';
+    dot.style.cssText=`left:${Math.random()*100}%;background:${colors[i%colors.length]};animation-delay:${(Math.random()*0.4).toFixed(2)}s;animation-duration:${(0.7+Math.random()*0.8).toFixed(2)}s`;
+    modal.appendChild(dot);setTimeout(()=>dot.remove(),1800);
+  }
+}
+function gsAddPrize(){
+  const emoji=(document.getElementById('gs-np-emoji').value.trim()||'🎁');
+  const name=document.getElementById('gs-np-name').value.trim();
+  const weight=parseInt(document.getElementById('gs-np-weight').value)||25;
+  if(!name){alert('請輸入獎品名稱');return;}
+  const prizes=gsGetPrizes();
+  const maxId=prizes.reduce((m,p)=>Math.max(m,p.id||0),0);
+  STATE.gachaPrizes=[...prizes,{id:maxId+1,emoji,name,weight}];
+  Store.save(); ParentMode.tab('gacha');
+}
+function gsDeletePrize(id){
+  STATE.gachaPrizes=gsGetPrizes().filter(p=>p.id!==id);
+  Store.save(); ParentMode.tab('gacha');
+}
+function gsGachaCost(){
+  const v=parseInt(document.getElementById('gs-gacha-cost-input').value)||300;
+  STATE.gachaCost=Math.max(50,Math.min(2000,v));
+  Store.save(); alert(`已儲存：每次扭蛋 ${STATE.gachaCost} 金幣`);
+}
 
 // ============ INIT ============
 document.addEventListener('DOMContentLoaded', () => {

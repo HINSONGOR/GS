@@ -108,6 +108,10 @@
                 <div class="qc-icon">🎖️</div>
                 <div class="qc-label">我的勳章</div>
             </button>
+            <button class="quick-card gacha-qc" onclick="gsOpenGacha()">
+                <div class="qc-icon">🎰</div>
+                <div class="qc-label">獎品扭蛋機</div>
+            </button>
         </div>
 
         <div class="today-box pixel-border">
@@ -405,6 +409,7 @@
         <button class="ptab active" id="ptab-stats" onclick="ParentMode.tab('stats')">📊 統計</button>
         <button class="ptab" id="ptab-upload" onclick="ParentMode.tab('upload')">📤 上載</button>
         <button class="ptab" id="ptab-manage" onclick="ParentMode.tab('manage')">⚙️ 管理</button>
+        <button class="ptab" id="ptab-gacha" onclick="ParentMode.tab('gacha')">🎰 扭蛋</button>
     </div>
 
     <!-- Stats Tab -->
@@ -505,6 +510,9 @@
         </div>
     </div>
 
+    <!-- Gacha Tab -->
+    <div id="ptabContent-gacha" class="ptab-content" style="display:none"></div>
+
     <!-- Manage Tab -->
     <div id="ptabContent-manage" class="ptab-content" style="display:none">
         <div class="manage-card pixel-border">
@@ -528,6 +536,40 @@
 </div>
 
 <!-- ============ MODALS ============ -->
+
+<!-- Gacha Modal -->
+<div id="modal-gs-gacha" class="modal-overlay" style="display:none" onclick="if(event.target===this)App.closeModal('modal-gs-gacha')">
+    <div class="modal-box pixel-border gs-gacha-modal">
+        <div class="gacha-topbar">
+            <div class="gacha-modal-title">🎰 獎品扭蛋機</div>
+            <div class="gacha-bal">🪙 <span id="gs-gacha-coin-bal">0</span></div>
+        </div>
+        <div class="gacha-machine-area">
+            <div class="gacha-machine-body">
+                <div class="gacha-window">
+                    <div class="gacha-capsule" id="gs-gacha-capsule"></div>
+                </div>
+            </div>
+            <button class="gacha-spin-btn" id="gs-gacha-spin-btn" onclick="gsSpinGacha()">
+                <span class="gsb-icon">🎰</span>
+                <span class="gsb-text">扭蛋！</span>
+                <span class="gsb-cost">-300 🪙</span>
+            </button>
+        </div>
+        <div class="gacha-result hidden" id="gs-gacha-result">
+            <div class="gacha-res-emoji" id="gs-gacha-res-emoji"></div>
+            <div class="gacha-res-name" id="gs-gacha-res-name"></div>
+            <div class="gacha-res-congrats">🎉 恭喜獲得！</div>
+        </div>
+        <div class="gacha-tabs">
+            <button class="gacha-tab active" id="gstab-pool" onclick="gsSwitchTab('pool')">獎品池</button>
+            <button class="gacha-tab" id="gstab-hist" onclick="gsSwitchTab('hist')">抽獎記錄</button>
+        </div>
+        <div id="gs-gacha-tab-content"></div>
+        <button class="pixel-btn" style="width:100%;margin-top:10px" onclick="App.closeModal('modal-gs-gacha')">關閉</button>
+    </div>
+</div>
+
 <!-- Badges Modal -->
 <div id="modal-badges" class="modal-overlay" style="display:none" onclick="if(event.target===this)App.closeModal('modal-badges')">
     <div class="modal-box pixel-border">
