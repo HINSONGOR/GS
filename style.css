@@ -948,16 +948,16 @@ textarea.pixel-input { resize: vertical; }
 .ci-streak-sub { font-size: 0.78rem; color: rgba(245,230,200,0.6); margin-top: 4px; }
 .ci-req { font-size: 0.78rem; color: rgba(245,230,200,0.55); text-align: right; line-height: 1.5; }
 .ci-calendar { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; margin-bottom: 8px; }
-.ci-cell { aspect-ratio: 1; border-radius: 4px; background: rgba(255,255,255,0.06); }
+.ci-cell { aspect-ratio: 1; border-radius: 4px; background: rgba(255,255,255,0.12); }
 .ci-done { background: #2d6a2d; }
-.ci-miss { background: rgba(255,255,255,0.06); }
-.ci-today { background: rgba(255,255,255,0.06); outline: 2px solid var(--hp-gold); }
+.ci-miss { background: rgba(255,255,255,0.12); }
+.ci-today { background: rgba(212,175,55,0.25); outline: 2px solid var(--hp-gold); }
 .ci-legend { display: flex; gap: 12px; margin-top: 4px; }
 .ci-leg-item { display: flex; align-items: center; gap: 4px; font-size: 0.72rem; color: rgba(245,230,200,0.6); }
 .ci-leg-dot { width: 10px; height: 10px; border-radius: 2px; }
 .ci-leg-dot.ci-done { background: #2d6a2d; }
-.ci-leg-dot.ci-today { background: transparent; outline: 2px solid var(--hp-gold); }
-.ci-leg-dot.ci-miss { background: rgba(255,255,255,0.06); }
+.ci-leg-dot.ci-today { background: rgba(212,175,55,0.25); outline: 2px solid var(--hp-gold); }
+.ci-leg-dot.ci-miss { background: rgba(255,255,255,0.12); }
 .daily-log-row { padding: 10px 0; border-bottom: 1px solid rgba(212,175,55,0.15); }
 .daily-log-row:last-child { border-bottom: none; }
 .daily-log-date { font-size: 0.82rem; font-weight: 700; color: var(--hp-gold); margin-bottom: 6px; }
