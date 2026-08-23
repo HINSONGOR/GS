@@ -2483,7 +2483,7 @@ const ParentMode = {
   renderGacha() {
     const prizes=gsGetPrizes();
     const total=prizes.reduce((s,p)=>s+p.weight,0);
-    const cost=STATE.gachaCost||300;
+    const cost=STATE.gachaCost!=null?STATE.gachaCost:300;
     const ci=STATE.studyCheckIn||{};
     document.getElementById('ptabContent-gacha').innerHTML=`
       <div class="manage-card pixel-border">
@@ -2499,7 +2499,7 @@ const ParentMode = {
       <div class="manage-card pixel-border">
         <h3>🎰 扭蛋機設定</h3>
         <div class="gacha-cfg-cost">每次費用：
-          <input id="gs-gacha-cost-input" type="number" min="50" max="2000" value="${cost}" class="gacha-input-sm"> 金幣
+          <input id="gs-gacha-cost-input" type="number" min="0" max="2000" value="${cost}" class="gacha-input-sm"> 金幣
           <button onclick="gsGachaCost()" class="gacha-save-btn">儲存</button>
         </div>
         <div style="margin:10px 0 6px;font-size:0.85rem;color:#aaa">獎品池（${prizes.length} 項）</div>
@@ -3012,7 +3012,7 @@ function gsShowParent(){
   for(let i=34;i>=0;i--){const d=new Date(today+'T00:00:00');d.setDate(d.getDate()-i);const ds=d.toISOString().slice(0,10);const cls=ds===today?'ci-today':histSet.has(ds)?'ci-done':'ci-miss';ciCells.push(`<div class="ci-cell ${cls}" title="${ds}"></div>`);}
   const prizes=gsGetPrizes();
   const tw=prizes.reduce((s,p)=>s+p.weight,0);
-  const cost=STATE.gachaCost||300;
+  const cost=STATE.gachaCost!=null?STATE.gachaCost:300;
   body.innerHTML=`
     <div class="parent-card">
       <div class="parent-card-title">📊 總體學習情況</div>
@@ -3041,7 +3041,7 @@ function gsShowParent(){
     </div>
     <div class="parent-card">
       <div class="parent-card-title">🎰 扭蛋機設定</div>
-      <div class="gacha-cfg-cost">每次費用：<input id="gs-gacha-cost-input" type="number" min="50" max="2000" value="${cost}" class="gacha-input-sm"> 金幣 <button onclick="gsGachaCost()" class="gacha-save-btn">儲存</button></div>
+      <div class="gacha-cfg-cost">每次費用：<input id="gs-gacha-cost-input" type="number" min="0" max="2000" value="${cost}" class="gacha-input-sm"> 金幣 <button onclick="gsGachaCost()" class="gacha-save-btn">儲存</button></div>
       <div style="margin:10px 0 6px;font-size:0.85rem;color:#aaa">獎品池（${prizes.length} 項）</div>
       ${prizes.map(p=>{const pct=tw>0?Math.round(p.weight/tw*100):0;return`<div class="gacha-cfg-row"><span class="gacha-cfg-emoji">${p.emoji}</span><span class="gacha-cfg-name">${p.name}</span><span class="gacha-cfg-pct">${pct}%</span><button onclick="gsDeletePrize(${p.id})" class="gacha-del-btn">🗑️</button></div>`;}).join('')}
       <div style="margin:10px 0 6px;font-size:0.85rem;color:#aaa">新增獎品</div>
@@ -3114,7 +3114,7 @@ function gsOpenGacha(){
 function gsUpdateGachaBtn(){
   const btn=document.getElementById('gs-gacha-spin-btn');
   if(!btn)return;
-  const cost=STATE.gachaCost||300;
+  const cost=STATE.gachaCost!=null?STATE.gachaCost:300;
   if(STATE.coins<cost){btn.disabled=true;btn.innerHTML=`<span class="gsb-icon">🪙</span><span class="gsb-text">金幣不足</span><span class="gsb-cost">需 ${cost} 🪙</span>`;}
   else{btn.disabled=false;btn.innerHTML=`<span class="gsb-icon">🥚</span><span class="gsb-text">扭蛋！</span><span class="gsb-cost">-${cost} 🪙</span>`;}
 }
@@ -3132,7 +3132,7 @@ function gsSwitchTab(tab){
   }
 }
 function gsSpinGacha(){
-  const cost=STATE.gachaCost||300;
+  const cost=STATE.gachaCost!=null?STATE.gachaCost:300;
   if(STATE.coins<cost)return;
   document.getElementById('gs-gacha-spin-btn').disabled=true;
   document.getElementById('gs-gacha-result').classList.add('hidden');
@@ -3192,8 +3192,8 @@ function gsDeletePrize(id){
   Store.save(); gsShowParent();
 }
 function gsGachaCost(){
-  const v=parseInt(document.getElementById('gs-gacha-cost-input').value)||300;
-  STATE.gachaCost=Math.max(50,Math.min(2000,v));
+  const v=parseInt(document.getElementById('gs-gacha-cost-input').value);
+  STATE.gachaCost=Math.max(0,Math.min(2000,isNaN(v)?300:v));
   Store.save(); alert(`已儲存：每次扭蛋 ${STATE.gachaCost} 金幣`);
 }
 
