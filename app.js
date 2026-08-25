@@ -3043,10 +3043,11 @@ function gsShowParent(){
       <div class="parent-card-title">🎰 扭蛋機設定</div>
       <div class="gacha-cfg-cost">每次費用：<input id="gs-gacha-cost-input" type="number" min="0" max="2000" value="${cost}" class="gacha-input-sm"> 金幣 <button onclick="gsGachaCost()" class="gacha-save-btn">儲存</button></div>
       <div style="margin:10px 0 6px;font-size:0.85rem;color:#aaa">獎品池（${prizes.length} 項）</div>
-      ${prizes.map(p=>{const pct=tw>0?Math.round(p.weight/tw*100):0;return`<div class="gacha-cfg-row"><span class="gacha-cfg-emoji">${p.emoji}</span><span class="gacha-cfg-name">${p.name}</span><span class="gacha-cfg-pct">${pct}%</span><button onclick="gsDeletePrize(${p.id})" class="gacha-del-btn">🗑️</button></div>`;}).join('')}
-      <div style="margin:10px 0 6px;font-size:0.85rem;color:#aaa">新增獎品</div>
-      <div class="gacha-add-row"><input id="gs-np-emoji" type="text" placeholder="📦" maxlength="4" class="gacha-input-emoji"><input id="gs-np-name" type="text" placeholder="獎品名稱" class="gacha-input-name"><input id="gs-np-weight" type="number" min="1" max="999" placeholder="權重" value="25" class="gacha-input-sm"><button onclick="gsAddPrize()" class="gacha-save-btn">新增</button></div>
-      <p style="font-size:0.75rem;color:#888;margin-top:6px">權重越高抽中機率越大，系統自動換算成百分比。機率只在此頁顯示，學生看不到。</p>
+      ${prizes.map(p=>{const pct=tw>0?Math.round(p.weight/tw*100):0;return`<div class="gacha-cfg-row"><span class="gacha-cfg-emoji">${p.emoji}</span><span class="gacha-cfg-name">${p.name}</span><div class="gacha-weight-edit"><input type="number" class="gacha-pct-input" value="${p.weight}" min="1" max="999" onchange="gsUpdatePrizeWeight(${p.id},this.value)"><span class="gacha-cfg-pct">${pct}%</span></div><button onclick="gsDeletePrize(${p.id})" class="gacha-del-btn">🗑️</button></div>`;}).join('')}
+      <div style="margin:12px 0 6px;font-size:0.85rem;color:#aaa">新增獎品 — 揀圖案：</div>
+      <div class="gacha-emoji-grid">${GS_PRIZE_EMOJIS.map(e=>`<button class="emoji-pick-btn" onclick="document.getElementById('gs-np-emoji-sel').textContent=this.textContent;document.querySelectorAll('#gs-parent-body .emoji-pick-btn').forEach(b=>b.classList.remove('ep-sel'));this.classList.add('ep-sel')">${e}</button>`).join('')}</div>
+      <div class="gacha-add-row" style="margin-top:8px"><span id="gs-np-emoji-sel" class="np-emoji-display">🎁</span><input id="gs-np-name" type="text" placeholder="獎品名稱" class="gacha-input-name"><input id="gs-np-weight" type="number" min="1" max="999" placeholder="權重%" value="25" class="gacha-input-sm"><button onclick="gsAddPrize()" class="gacha-save-btn">新增</button></div>
+      <p style="font-size:0.75rem;color:#888;margin-top:6px">權重越高抽中機率越大，系統自動換算成百分比。</p>
     </div>
     <div class="parent-card">
       <div class="parent-card-title">📅 每日學習紀錄 <span style="font-size:0.75rem;opacity:0.6">（最近14日）</span></div>
@@ -3092,6 +3093,7 @@ function showCheckinToastGS(coins,xp,streak){
 }
 
 // ============ GACHA MACHINE ============
+const GS_PRIZE_EMOJIS=['🪙','💵','💶','🏪','🎮','🎬','🍕','🍦','🍭','🎂','🛍️','🎁','🧸','📱','💻','🎯','🏆','⭐','🎵','🎪','🏝️','🎠','🍔','✈️','🎢','🎭','🏖️','🚀','🎀','🧁'];
 const GS_DEFAULT_PRIZES=[
   {id:1,emoji:'🪙',name:'$5 零用錢',weight:60},
   {id:2,emoji:'💵',name:'$20 零用錢',weight:25},
@@ -3192,7 +3194,7 @@ function gsSpawnConfetti(){
   }
 }
 function gsAddPrize(){
-  const emoji=(document.getElementById('gs-np-emoji').value.trim()||'🎁');
+  const emoji=(document.getElementById('gs-np-emoji-sel')?.textContent.trim()||'🎁');
   const name=document.getElementById('gs-np-name').value.trim();
   const weight=parseInt(document.getElementById('gs-np-weight').value)||25;
   if(!name){alert('請輸入獎品名稱');return;}
@@ -3203,6 +3205,11 @@ function gsAddPrize(){
 }
 function gsDeletePrize(id){
   STATE.gachaPrizes=gsGetPrizes().filter(p=>p.id!==id);
+  Store.save(); gsShowParent();
+}
+function gsUpdatePrizeWeight(id,val){
+  const w=Math.max(1,Math.min(999,parseInt(val)||1));
+  STATE.gachaPrizes=gsGetPrizes().map(p=>p.id===id?{...p,weight:w}:p);
   Store.save(); gsShowParent();
 }
 function gsGachaCost(){
