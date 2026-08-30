@@ -253,6 +253,13 @@
         <div class="quiz-hdr-right">
             <div class="quiz-coin-disp">🪙 <span id="qCoins">0</span></div>
             <div class="timer-disp" id="timerDisp">⏱ <span id="timerTxt">—</span></div>
+            <div class="timer-mode-row" id="timerModeRow">
+                <button class="tmr-btn" data-sec="15" onclick="QuizEngine.setTimerMode(15)">15s</button>
+                <button class="tmr-btn" data-sec="30" onclick="QuizEngine.setTimerMode(30)">30s</button>
+                <button class="tmr-btn" data-sec="45" onclick="QuizEngine.setTimerMode(45)">45s</button>
+                <button class="tmr-btn" data-sec="60" onclick="QuizEngine.setTimerMode(60)">1分</button>
+                <button class="tmr-btn" data-sec="0" onclick="QuizEngine.setTimerMode(0)">停</button>
+            </div>
         </div>
     </div>
 

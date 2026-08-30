@@ -1424,6 +1424,7 @@ let STATE = {
   badges: [],
   loginStreak: 1,
   lastLoginDate: '',
+  timerMode: -1,
   currentModule: null,
   currentQType: null,
   stats: {
@@ -1684,6 +1685,7 @@ const QuizEngine = {
     this.newBadges = []; this.submitted = false;
     this.sessionStartTime = Date.now();
     App.showScreen('screen-quiz');
+    this.syncTimerButtons();
     this.renderQuestion();
   },
 
@@ -1728,12 +1730,13 @@ const QuizEngine = {
     document.getElementById('quizNavRow').style.display = 'flex';
 
     this.renderAnswerArea(q);
-    const timerSec = q.type === 'analysis' ? 90
+    const autoSec = q.type === 'analysis' ? 90
       : q.type === 'short' ? 60
       : (q.type === 'match' || q.type === 'order') ? (q.left ? q.left.length * 15 : 60)
       : q.type === 'scenario' ? 120
       : q.type === 'classify' ? 60
       : 30;
+    const timerSec = STATE.timerMode >= 0 ? STATE.timerMode : autoSec;
     this.startTimer(timerSec);
   },
 
@@ -1922,10 +1925,31 @@ const QuizEngine = {
     area.appendChild(wrap);
   },
 
+  setTimerMode(sec) {
+    STATE.timerMode = sec;
+    Store.save();
+    document.querySelectorAll('.tmr-btn').forEach(b => {
+      b.classList.toggle('active', parseInt(b.dataset.sec) === sec);
+    });
+  },
+
+  syncTimerButtons() {
+    document.querySelectorAll('.tmr-btn').forEach(b => {
+      b.classList.toggle('active', parseInt(b.dataset.sec) === STATE.timerMode);
+    });
+  },
+
   startTimer(seconds) {
     this.totalTime = seconds;
     this.timeLeft = seconds;
     clearInterval(this.timer);
+    // 0 = no timer (停)
+    if (seconds === 0) {
+      document.getElementById('timerTxt').textContent = '∞';
+      document.getElementById('timerBarFill').style.width = '100%';
+      document.getElementById('timerBarFill').style.background = 'linear-gradient(90deg,#00e5e5,#6b21a8)';
+      return;
+    }
     document.getElementById('timerTxt').textContent = seconds + 's';
     document.getElementById('timerBarFill').style.width = '100%';
     document.getElementById('timerBarFill').style.background = 'linear-gradient(90deg,#00e5e5,#6b21a8)';
