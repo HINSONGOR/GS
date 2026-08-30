@@ -1931,6 +1931,16 @@ const QuizEngine = {
     document.querySelectorAll('.tmr-btn').forEach(b => {
       b.classList.toggle('active', parseInt(b.dataset.sec) === sec);
     });
+    // Apply immediately to current question
+    if (sec === 0) {
+      clearInterval(this.timer);
+      this.timeLeft = 0;
+      document.getElementById('timerTxt').textContent = '∞';
+      document.getElementById('timerBarFill').style.width = '100%';
+      document.getElementById('timerBarFill').style.background = 'linear-gradient(90deg,#00e5e5,#6b21a8)';
+    } else if (sec > 0) {
+      this.startTimer(sec);
+    }
   },
 
   syncTimerButtons() {
