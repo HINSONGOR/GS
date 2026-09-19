@@ -1804,12 +1804,16 @@ const QuizEngine = {
           const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
           recog = new SR();
           recog.lang = 'zh-HK';
-          recog.interimResults = false;
+          recog.continuous = true;
+          recog.interimResults = true;
           recog.maxAlternatives = 1;
           recog.onresult = (ev) => {
-            ta.value = ev.results[0][0].transcript;
+            let transcript = '';
+            for (let i = 0; i < ev.results.length; i++) {
+              transcript += ev.results[i][0].transcript;
+            }
+            ta.value = transcript;
             this.currentUserAnswer = ta.value.trim();
-            ta.focus();
           };
           recog.onerror = () => { voiceBtn.innerHTML = '🎤 語音輸入'; voiceBtn.classList.remove('recording'); recording = false; ta.focus(); };
           recog.onend = () => { voiceBtn.innerHTML = '🎤 語音輸入'; voiceBtn.classList.remove('recording'); recording = false; ta.focus(); };
