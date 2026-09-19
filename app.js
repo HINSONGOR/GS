@@ -1794,8 +1794,13 @@ const QuizEngine = {
         voiceBtn.innerHTML = '🎤 語音輸入';
         voiceBtn.title = '按住說話，放開確認';
         let recog = null;
-        voiceBtn.onmousedown = voiceBtn.ontouchstart = (e) => {
+        let recording = false;
+        voiceBtn.onclick = (e) => {
           e.preventDefault();
+          if (recording) {
+            if (recog) recog.stop();
+            return;
+          }
           const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
           recog = new SR();
           recog.lang = 'zh-HK';
@@ -1804,14 +1809,15 @@ const QuizEngine = {
           recog.onresult = (ev) => {
             ta.value = ev.results[0][0].transcript;
             this.currentUserAnswer = ta.value.trim();
+            ta.focus();
           };
-          recog.onerror = () => { voiceBtn.innerHTML = '🎤 語音輸入'; voiceBtn.classList.remove('recording'); };
-          recog.onend = () => { voiceBtn.innerHTML = '🎤 語音輸入'; voiceBtn.classList.remove('recording'); };
+          recog.onerror = () => { voiceBtn.innerHTML = '🎤 語音輸入'; voiceBtn.classList.remove('recording'); recording = false; ta.focus(); };
+          recog.onend = () => { voiceBtn.innerHTML = '🎤 語音輸入'; voiceBtn.classList.remove('recording'); recording = false; ta.focus(); };
           recog.start();
-          voiceBtn.innerHTML = '🔴 錄音中⋯';
+          recording = true;
+          voiceBtn.innerHTML = '🔴 錄音中（再按停止）';
           voiceBtn.classList.add('recording');
         };
-        voiceBtn.onmouseup = voiceBtn.ontouchend = () => { if (recog) recog.stop(); };
         area.appendChild(voiceBtn);
       }
 
