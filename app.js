@@ -2221,8 +2221,17 @@ const QuizEngine = {
       if (!Array.isArray(userAns) || userAns.some(v => v === null)) return false;
       return JSON.stringify(userAns) === JSON.stringify(q.answer);
     }
-    // Text-based: check if contains key keywords
-    if (typeof userAns === 'string' && userAns.length > 3) return true; // Give credit for effort
+    // Fill: check answer contains expected keywords
+    if (q.type === 'fill') {
+      if (typeof userAns !== 'string' || userAns.trim() === '') return false;
+      const normalize = s => s.replace(/[，。、！？《》〈〉「」『』【】\s]/g,'').toLowerCase();
+      const got = normalize(userAns);
+      // Support multiple correct answers separated by ／
+      const variants = q.answer.split('／').map(normalize);
+      return variants.some(v => got.includes(v) || v.includes(got));
+    }
+    // Short / scenario / analysis: give credit for effort (teacher marks manually)
+    if (typeof userAns === 'string' && userAns.trim().length > 0) return true;
     return false;
   },
 
