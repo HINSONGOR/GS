@@ -1787,6 +1787,34 @@ const QuizEngine = {
       ta.oninput = () => { this.currentUserAnswer = ta.value.trim(); };
       area.appendChild(ta);
 
+      // Voice input button (fill questions only)
+      if (q.type === 'fill' && (window.SpeechRecognition || window.webkitSpeechRecognition)) {
+        const voiceBtn = document.createElement('button');
+        voiceBtn.className = 'pixel-btn grey voice-btn';
+        voiceBtn.innerHTML = '🎤 語音輸入';
+        voiceBtn.title = '按住說話，放開確認';
+        let recog = null;
+        voiceBtn.onmousedown = voiceBtn.ontouchstart = (e) => {
+          e.preventDefault();
+          const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+          recog = new SR();
+          recog.lang = 'zh-HK';
+          recog.interimResults = false;
+          recog.maxAlternatives = 1;
+          recog.onresult = (ev) => {
+            ta.value = ev.results[0][0].transcript;
+            this.currentUserAnswer = ta.value.trim();
+          };
+          recog.onerror = () => { voiceBtn.innerHTML = '🎤 語音輸入'; voiceBtn.classList.remove('recording'); };
+          recog.onend = () => { voiceBtn.innerHTML = '🎤 語音輸入'; voiceBtn.classList.remove('recording'); };
+          recog.start();
+          voiceBtn.innerHTML = '🔴 錄音中⋯';
+          voiceBtn.classList.add('recording');
+        };
+        voiceBtn.onmouseup = voiceBtn.ontouchend = () => { if (recog) recog.stop(); };
+        area.appendChild(voiceBtn);
+      }
+
       // Hint button — show model answer on demand
       this.hintUsed = false;
       const hintWrap = document.createElement('div');

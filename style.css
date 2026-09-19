@@ -652,6 +652,19 @@ textarea.pixel-input { resize: vertical; }
   padding: 8px 18px !important;
   opacity: 0.85;
 }
+.voice-btn {
+  font-size: 13px !important;
+  padding: 8px 18px !important;
+  margin-bottom: 8px !important;
+  display: block;
+}
+.voice-btn.recording {
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: #fff !important;
+  animation: pulse 0.8s infinite alternate;
+}
+@keyframes pulse { from { opacity: 1; } to { opacity: 0.6; } }
 .hint-answer-box {
   margin-top: 10px;
   background: rgba(180, 0, 0, 0.12);
