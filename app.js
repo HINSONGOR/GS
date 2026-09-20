@@ -161,25 +161,25 @@ const QUESTIONS = [
   explanation:'積極想法：相信自己能改變、採取具體行動（調鬧鐘）。消極想法：怪責他人、認為無法改變，這些想法令人裹足不前，無法解決問題。'},
 
 // ---- 6.3 選擇題一（工作紙）----
-{id:'q3201',module:'6.3',type:'mc',multi:true,question:'以下哪些皇帝的統治為清朝帶來盛世？（答案可多於一個。）',options:['順治。','光緒。','康熙。','乾隆。'],answer:[2,3],explanation:'康熙和乾隆的統治時期合稱「康乾盛世」，是清朝最繁盛的年代。順治是清初入關皇帝，光緒在位時清朝已衰落。'},
-{id:'q3202',module:'6.3',type:'mc',question:'康熙皇帝在任內做了甚麼事情？',options:['整頓貪污風氣。','改善清朝財政體制。','擴大清朝版圖。','選用人才不分種族，只要是賢能之士都會任用。'],answer:3,explanation:'康熙皇帝廣納賢才，不分滿漢，任用賢能，是清朝盛世的重要原因之一。'},
-{id:'q3203',module:'6.3',type:'mc',question:'在哪個清朝皇帝的統治後期，國勢開始轉弱？',options:['乾隆。','康熙。','道光。','雍正。'],answer:0,explanation:'乾隆晚年寵信和珅，吏治腐敗，多次南巡耗費巨資，令國庫空虛，清朝國勢自此轉弱。'},
-{id:'q3204',module:'6.3',type:'mc',multi:true,question:'為甚麼到了乾隆皇帝晚年，清朝國勢開始轉弱？（答案可多於一個。）',options:['農民耕地不足。','國庫空虛。','外族入侵。','官員貪污受賄，破壞法紀。'],answer:[0,1,3],explanation:'乾隆晚年農民耕地不足、國庫空虛、官員貪污三大問題同時出現，令清朝國力大減。外族入侵並非主因。'},
-{id:'q3205',module:'6.3',type:'mc',multi:true,question:'清朝中期以後，大量國民沉迷吸食鴉片對當時中國帶來甚麼禍害？（答案可多於一個。）',options:['死亡率大大提升，人口迅速減少。','國民健康受損。','軍隊吸食鴉片，影響戰鬥力。','官員貪污受賄，破壞法紀。'],answer:[1,2,3],explanation:'鴉片令國民健康受損、軍隊戰鬥力下降、官員腐化，白銀大量外流，嚴重削弱清朝國力。'},
-{id:'q3206',module:'6.3',type:'mc',question:'誰被派往廣州銷毀鴉片？',options:['孫中山。','林則徐。','毛澤東。','慈禧太后。'],answer:1,explanation:'道光帝委派欽差大臣林則徐赴廣州查禁鴉片，並於1839年在虎門公開銷毀約2萬箱鴉片。'},
-{id:'q3207',module:'6.3',type:'mc',question:'林則徐在哪裏銷毀鴉片？',options:['澳門。','上海。','香港。','虎門。'],answer:3,explanation:'1839年6月，林則徐在廣東虎門海灘公開銷毀鴉片，史稱「虎門銷煙」，是鴉片戰爭的導火線之一。'},
-{id:'q3208',module:'6.3',type:'mc',question:'以下哪項歷史事件發生於1839年？',options:['林則徐在虎門銷毀大量鴉片。','清政府簽訂《辛丑和約》。','孫中山成立中國同盟會。','盧溝橋事變。'],answer:0,explanation:'1839年，林則徐在虎門銷煙。《辛丑和約》簽於1901年，中國同盟會成立於1905年，盧溝橋事變發生於1937年。'},
-{id:'q3209',module:'6.3',type:'mc',question:'英國為甚麼會在1840年攻打中國？',options:['中國發生內戰，英國乘虛而入。','英軍藉口一名士兵失蹤，與中國軍隊激戰。','英國不滿清政府銷毀鴉片。','英國不滿中國只割讓香港予英國。'],answer:2,explanation:'1839年林則徐虎門銷煙，英國以此為藉口，於1840年派兵攻打中國，爆發鴉片戰爭。'},
-{id:'q3210',module:'6.3',type:'mc',question:'1840至1842年，英國向中國發動了哪場戰爭？',options:['鴉片戰爭。','甲午戰爭。','抗日戰爭。','解放戰爭。'],answer:0,explanation:'鴉片戰爭（1840-1842年）是中英之間的戰爭，以清朝戰敗、簽訂《南京條約》告終。'},
-{id:'q3211',module:'6.3',type:'mc',question:'在鴉片戰爭中，清政府戰敗後，被迫簽訂以下哪項條約？',options:['《上海條約》。','《北京條約》。','《南京條約》。','《天津條約》。'],answer:2,explanation:'1842年，清朝在鴉片戰爭中戰敗，被迫簽訂《南京條約》，這是中國近代史上第一個不平等條約。'},
-{id:'q3212',module:'6.3',type:'mc',question:'以下哪項不是《南京條約》的內容？',options:['把香港島給予英國管治。','向日本大額賠款。','向英國大額賠款。','開放廣州、上海等五個港口為通商口岸。'],answer:1,explanation:'《南京條約》是與英國簽訂的，賠款對象是英國而非日本。向日本賠款是1895年《馬關條約》的內容。'},
-{id:'q3213',module:'6.3',type:'mc',question:'以下哪項不是《北京條約》的內容？',options:['把九龍半島交予英國管治。','開放天津為通商口岸。','向英國和法國大額賠款。','容許聯軍在北京至山海關一帶駐軍。'],answer:3,explanation:'容許聯軍在北京至山海關駐軍是《辛丑和約》（1901年）的內容，並非《北京條約》（1860年）。'},
-{id:'q3214',module:'6.3',type:'mc',question:'以下哪項是《馬關條約》的內容？',options:['拆除大沽口到北京的所有炮台。','向英國和法國大額賠款。','增開四個通商口岸。','向列強大額賠款。'],answer:2,explanation:'《馬關條約》（1895年）規定增開四個通商口岸。拆除炮台和向列強賠款是《辛丑和約》的內容，向英法賠款是《北京條約》的內容。'},
-{id:'q3215',module:'6.3',type:'mc',question:'以下哪項不是《辛丑和約》的內容？',options:['向列強大額賠款。','把遼東半島、台灣、澎湖列島讓予日本。','容許聯軍在北京至山海關一帶駐軍。','拆除大沽口到北京的所有炮台。'],answer:1,explanation:'割讓遼東半島、台灣及澎湖列島是《馬關條約》（1895年）的內容，並非《辛丑和約》（1901年）。'},
-{id:'q3216',module:'6.3',type:'mc',multi:true,question:'以下哪項條約與香港有關？（答案可多於一個。）',options:['《辛丑和約》。','《南京條約》。','《北京條約》。','《馬關條約》。'],answer:[1,2],explanation:'《南京條約》割讓香港島（1842年）；《北京條約》割讓九龍半島（1860年）。兩者皆與香港直接相關。'},
-{id:'q3217',module:'6.3',type:'mc',question:'以下哪項不是清政府跟列強簽訂的不平等條約對中國所造成的影響？',options:['清政府因條約所造成的財政負擔而加重稅收，人民生活困苦。','割讓土地，令中國領土失去完整。','開放通商口岸，令中國商人要面對外國工業品的龐大競爭。','人民因國家動亂而離開國家，移民其他國家。'],answer:3,explanation:'選項D描述的是民眾自願移民，並非不平等條約直接導致的影響。條約主要造成財政負擔、領土喪失和通商競爭。'},
-{id:'q3218',module:'6.3',type:'mc',question:'辛亥革命後，誰被推舉為臨時大總統？',options:['林則徐。','毛澤東。','蔣介石。','孫中山。'],answer:3,explanation:'1912年1月1日，孫中山在南京宣誓就任中華民國臨時大總統，正式宣告中華民國成立。'},
-{id:'q3219',module:'6.3',type:'mc',multi:true,question:'以下哪項有關孫中山的描述是錯誤的？（答案可多於一個。）',options:['孫中山原名孫文。','孫中山成立中國同盟會。','孫中山領導革命人士在1911年的黃花崗之役中起義成功。','孫中山是中華人民共和國的臨時大總統。'],answer:[2,3],explanation:'黃花崗之役（1911年4月）失敗，成功的是武昌起義（1911年10月）。孫中山是中華民國（非中華人民共和國）的臨時大總統。'},
+{id:'q3201',module:'6.3',type:'mc',part:'一',multi:true,question:'以下哪些皇帝的統治為清朝帶來盛世？（答案可多於一個。）',options:['順治。','光緒。','康熙。','乾隆。'],answer:[2,3],explanation:'康熙和乾隆的統治時期合稱「康乾盛世」，是清朝最繁盛的年代。順治是清初入關皇帝，光緒在位時清朝已衰落。'},
+{id:'q3202',module:'6.3',type:'mc',part:'一',question:'康熙皇帝在任內做了甚麼事情？',options:['整頓貪污風氣。','改善清朝財政體制。','擴大清朝版圖。','選用人才不分種族，只要是賢能之士都會任用。'],answer:3,explanation:'康熙皇帝廣納賢才，不分滿漢，任用賢能，是清朝盛世的重要原因之一。'},
+{id:'q3203',module:'6.3',type:'mc',part:'一',question:'在哪個清朝皇帝的統治後期，國勢開始轉弱？',options:['乾隆。','康熙。','道光。','雍正。'],answer:0,explanation:'乾隆晚年寵信和珅，吏治腐敗，多次南巡耗費巨資，令國庫空虛，清朝國勢自此轉弱。'},
+{id:'q3204',module:'6.3',type:'mc',part:'一',multi:true,question:'為甚麼到了乾隆皇帝晚年，清朝國勢開始轉弱？（答案可多於一個。）',options:['農民耕地不足。','國庫空虛。','外族入侵。','官員貪污受賄，破壞法紀。'],answer:[0,1,3],explanation:'乾隆晚年農民耕地不足、國庫空虛、官員貪污三大問題同時出現，令清朝國力大減。外族入侵並非主因。'},
+{id:'q3205',module:'6.3',type:'mc',part:'一',multi:true,question:'清朝中期以後，大量國民沉迷吸食鴉片對當時中國帶來甚麼禍害？（答案可多於一個。）',options:['死亡率大大提升，人口迅速減少。','國民健康受損。','軍隊吸食鴉片，影響戰鬥力。','官員貪污受賄，破壞法紀。'],answer:[1,2,3],explanation:'鴉片令國民健康受損、軍隊戰鬥力下降、官員腐化，白銀大量外流，嚴重削弱清朝國力。'},
+{id:'q3206',module:'6.3',type:'mc',part:'一',question:'誰被派往廣州銷毀鴉片？',options:['孫中山。','林則徐。','毛澤東。','慈禧太后。'],answer:1,explanation:'道光帝委派欽差大臣林則徐赴廣州查禁鴉片，並於1839年在虎門公開銷毀約2萬箱鴉片。'},
+{id:'q3207',module:'6.3',type:'mc',part:'一',question:'林則徐在哪裏銷毀鴉片？',options:['澳門。','上海。','香港。','虎門。'],answer:3,explanation:'1839年6月，林則徐在廣東虎門海灘公開銷毀鴉片，史稱「虎門銷煙」，是鴉片戰爭的導火線之一。'},
+{id:'q3208',module:'6.3',type:'mc',part:'一',question:'以下哪項歷史事件發生於1839年？',options:['林則徐在虎門銷毀大量鴉片。','清政府簽訂《辛丑和約》。','孫中山成立中國同盟會。','盧溝橋事變。'],answer:0,explanation:'1839年，林則徐在虎門銷煙。《辛丑和約》簽於1901年，中國同盟會成立於1905年，盧溝橋事變發生於1937年。'},
+{id:'q3209',module:'6.3',type:'mc',part:'一',question:'英國為甚麼會在1840年攻打中國？',options:['中國發生內戰，英國乘虛而入。','英軍藉口一名士兵失蹤，與中國軍隊激戰。','英國不滿清政府銷毀鴉片。','英國不滿中國只割讓香港予英國。'],answer:2,explanation:'1839年林則徐虎門銷煙，英國以此為藉口，於1840年派兵攻打中國，爆發鴉片戰爭。'},
+{id:'q3210',module:'6.3',type:'mc',part:'一',question:'1840至1842年，英國向中國發動了哪場戰爭？',options:['鴉片戰爭。','甲午戰爭。','抗日戰爭。','解放戰爭。'],answer:0,explanation:'鴉片戰爭（1840-1842年）是中英之間的戰爭，以清朝戰敗、簽訂《南京條約》告終。'},
+{id:'q3211',module:'6.3',type:'mc',part:'一',question:'在鴉片戰爭中，清政府戰敗後，被迫簽訂以下哪項條約？',options:['《上海條約》。','《北京條約》。','《南京條約》。','《天津條約》。'],answer:2,explanation:'1842年，清朝在鴉片戰爭中戰敗，被迫簽訂《南京條約》，這是中國近代史上第一個不平等條約。'},
+{id:'q3212',module:'6.3',type:'mc',part:'一',question:'以下哪項不是《南京條約》的內容？',options:['把香港島給予英國管治。','向日本大額賠款。','向英國大額賠款。','開放廣州、上海等五個港口為通商口岸。'],answer:1,explanation:'《南京條約》是與英國簽訂的，賠款對象是英國而非日本。向日本賠款是1895年《馬關條約》的內容。'},
+{id:'q3213',module:'6.3',type:'mc',part:'一',question:'以下哪項不是《北京條約》的內容？',options:['把九龍半島交予英國管治。','開放天津為通商口岸。','向英國和法國大額賠款。','容許聯軍在北京至山海關一帶駐軍。'],answer:3,explanation:'容許聯軍在北京至山海關駐軍是《辛丑和約》（1901年）的內容，並非《北京條約》（1860年）。'},
+{id:'q3214',module:'6.3',type:'mc',part:'一',question:'以下哪項是《馬關條約》的內容？',options:['拆除大沽口到北京的所有炮台。','向英國和法國大額賠款。','增開四個通商口岸。','向列強大額賠款。'],answer:2,explanation:'《馬關條約》（1895年）規定增開四個通商口岸。拆除炮台和向列強賠款是《辛丑和約》的內容，向英法賠款是《北京條約》的內容。'},
+{id:'q3215',module:'6.3',type:'mc',part:'一',question:'以下哪項不是《辛丑和約》的內容？',options:['向列強大額賠款。','把遼東半島、台灣、澎湖列島讓予日本。','容許聯軍在北京至山海關一帶駐軍。','拆除大沽口到北京的所有炮台。'],answer:1,explanation:'割讓遼東半島、台灣及澎湖列島是《馬關條約》（1895年）的內容，並非《辛丑和約》（1901年）。'},
+{id:'q3216',module:'6.3',type:'mc',part:'一',multi:true,question:'以下哪項條約與香港有關？（答案可多於一個。）',options:['《辛丑和約》。','《南京條約》。','《北京條約》。','《馬關條約》。'],answer:[1,2],explanation:'《南京條約》割讓香港島（1842年）；《北京條約》割讓九龍半島（1860年）。兩者皆與香港直接相關。'},
+{id:'q3217',module:'6.3',type:'mc',part:'一',question:'以下哪項不是清政府跟列強簽訂的不平等條約對中國所造成的影響？',options:['清政府因條約所造成的財政負擔而加重稅收，人民生活困苦。','割讓土地，令中國領土失去完整。','開放通商口岸，令中國商人要面對外國工業品的龐大競爭。','人民因國家動亂而離開國家，移民其他國家。'],answer:3,explanation:'選項D描述的是民眾自願移民，並非不平等條約直接導致的影響。條約主要造成財政負擔、領土喪失和通商競爭。'},
+{id:'q3218',module:'6.3',type:'mc',part:'一',question:'辛亥革命後，誰被推舉為臨時大總統？',options:['林則徐。','毛澤東。','蔣介石。','孫中山。'],answer:3,explanation:'1912年1月1日，孫中山在南京宣誓就任中華民國臨時大總統，正式宣告中華民國成立。'},
+{id:'q3219',module:'6.3',type:'mc',part:'一',multi:true,question:'以下哪項有關孫中山的描述是錯誤的？（答案可多於一個。）',options:['孫中山原名孫文。','孫中山成立中國同盟會。','孫中山領導革命人士在1911年的黃花崗之役中起義成功。','孫中山是中華人民共和國的臨時大總統。'],answer:[2,3],explanation:'黃花崗之役（1911年4月）失敗，成功的是武昌起義（1911年10月）。孫中山是中華民國（非中華人民共和國）的臨時大總統。'},
 
 // ---- 6.3 選擇題二（工作紙）----
 // 待上載
@@ -188,21 +188,21 @@ const QUESTIONS = [
 // 待上載
 
 // ---- 6.3 填充題一（工作紙）----
-{id:'q3101',module:'6.3',type:'fill',question:'__________ 皇帝執政期間，他整頓朝廷貪污風氣，令吏治清明，嚴查虧空，改善清朝財政體制。',answer:'雍正',explanation:'雍正帝（1722-1735年在位）以鐵腕整頓貪污，嚴查官員虧空，大力改革財政，令清朝國庫充實。'},
-{id:'q3102',module:'6.3',type:'fill',question:'到了 __________ 皇帝晚年，清朝的國勢開始轉弱。',answer:'乾隆',explanation:'乾隆帝晚年寵信大貪官和珅，多次下江南耗費巨資，致國庫空虛、吏治腐敗，清朝盛極而衰。'},
-{id:'q3103',module:'6.3',type:'fill',question:'清朝中後期，英國商人開始在中國販賣 __________，令中國人的健康受損，也令大量白銀流失。',answer:'鴉片',explanation:'鴉片是一種毒品，英國商人大量走私至中國，令國民上癮，白銀大量外流，嚴重削弱清朝國力。'},
-{id:'q3104',module:'6.3',type:'fill',question:'1839年，__________ 在虎門把搜查到的走私鴉片銷毀。',answer:'林則徐',explanation:'道光帝委派欽差大臣林則徐赴廣州查禁鴉片。1839年6月，林則徐在虎門公開銷毀約2萬箱鴉片，史稱「虎門銷煙」。'},
-{id:'q3105',module:'6.3',type:'fill',question:'清政府在鴉片戰爭中戰敗，被迫簽下 __________。',answer:'《南京條約》',explanation:'1842年，清朝在鴉片戰爭中戰敗，被迫與英國簽訂《南京條約》，這是中國近代史上第一個不平等條約。'},
-{id:'q3106',module:'6.3',type:'fill',question:'《南京條約》是清政府在 __________ 中戰敗後簽訂的不平等條約。',answer:'鴉片戰爭',explanation:'鴉片戰爭（1840-1842年）是中國近代第一次遭受西方列強入侵的戰爭，戰敗後簽訂《南京條約》。'},
-{id:'q3107',module:'6.3',type:'fill',question:'在鴉片戰爭中，清政府戰敗，被迫與英國簽訂《南京條約》，割讓 __________。',answer:'香港島',explanation:'《南京條約》規定割讓香港島給英國，香港島從1842年起由英國管治，直至1997年回歸中國。'},
-{id:'q3108',module:'6.3',type:'fill',question:'在鴉片戰爭後，__________ 先後侵略中國，清政府更因此簽訂了多項 __________ 條約。',answer:'列強／不平等',explanation:'鴉片戰爭後，英法俄美日等列強紛紛侵華，清政府被迫簽訂《北京條約》、《馬關條約》、《辛丑和約》等不平等條約。'},
-{id:'q3109',module:'6.3',type:'fill',question:'在《北京條約》中，其中一項條款是要中國把 __________ 交予英國管治。',answer:'九龍半島',explanation:'1860年英法聯軍之役後，清政府被迫簽訂《北京條約》，將九龍半島（界限街以南）割讓給英國。'},
-{id:'q3110',module:'6.3',type:'fill',question:'在 __________ 中，其中一項條款是把遼東半島、台灣及澎湖列島讓予日本。',answer:'《馬關條約》',explanation:'1895年中日甲午戰爭清朝戰敗，被迫簽訂《馬關條約》，割讓遼東半島、台灣及澎湖列島給日本。'},
-{id:'q3111',module:'6.3',type:'fill',question:'在《辛丑和約》中，其中一項條款是要容許聯軍在北京至 __________ 一帶駐軍。',answer:'山海關',explanation:'1901年《辛丑和約》規定清政府須賠款、拆除炮台，並允許外國軍隊在北京至山海關一帶駐守。'},
-{id:'q3112',module:'6.3',type:'fill',question:'孫中山成立 __________，組織有志救國人士參加革命活動。',answer:'中國同盟會',explanation:'1905年孫中山在日本東京成立中國同盟會，以「驅除韃虜、恢復中華、建立民國、平均地權」為革命綱領。'},
-{id:'q3113',module:'6.3',type:'fill',question:'孫中山組織革命人士於1911年發動 __________ 推翻 __________ 政府，建立中華民國。',answer:'辛亥革命／清',explanation:'1911年辛亥革命成功推翻清朝，結束中國兩千多年的封建帝制，建立亞洲第一個民主共和國——中華民國。'},
-{id:'q3114',module:'6.3',type:'fill',question:'1911年，__________ 起義成功，史稱「辛亥革命」。',answer:'武昌',explanation:'1911年10月10日，武昌起義爆發，革命軍佔領武漢三鎮，隨後各省紛紛響應，史稱「辛亥革命」。'},
-{id:'q3115',module:'6.3',type:'fill',question:'1912年1月1日，孫中山先生成立了 __________，他被推舉為臨時大總統。',answer:'中華民國',explanation:'1912年1月1日，孫中山在南京宣誓就任中華民國臨時大總統，正式宣告中華民國成立。'},
+{id:'q3101',module:'6.3',type:'fill',part:'一',question:'__________ 皇帝執政期間，他整頓朝廷貪污風氣，令吏治清明，嚴查虧空，改善清朝財政體制。',answer:'雍正',explanation:'雍正帝（1722-1735年在位）以鐵腕整頓貪污，嚴查官員虧空，大力改革財政，令清朝國庫充實。'},
+{id:'q3102',module:'6.3',type:'fill',part:'一',question:'到了 __________ 皇帝晚年，清朝的國勢開始轉弱。',answer:'乾隆',explanation:'乾隆帝晚年寵信大貪官和珅，多次下江南耗費巨資，致國庫空虛、吏治腐敗，清朝盛極而衰。'},
+{id:'q3103',module:'6.3',type:'fill',part:'一',question:'清朝中後期，英國商人開始在中國販賣 __________，令中國人的健康受損，也令大量白銀流失。',answer:'鴉片',explanation:'鴉片是一種毒品，英國商人大量走私至中國，令國民上癮，白銀大量外流，嚴重削弱清朝國力。'},
+{id:'q3104',module:'6.3',type:'fill',part:'一',question:'1839年，__________ 在虎門把搜查到的走私鴉片銷毀。',answer:'林則徐',explanation:'道光帝委派欽差大臣林則徐赴廣州查禁鴉片。1839年6月，林則徐在虎門公開銷毀約2萬箱鴉片，史稱「虎門銷煙」。'},
+{id:'q3105',module:'6.3',type:'fill',part:'一',question:'清政府在鴉片戰爭中戰敗，被迫簽下 __________。',answer:'《南京條約》',explanation:'1842年，清朝在鴉片戰爭中戰敗，被迫與英國簽訂《南京條約》，這是中國近代史上第一個不平等條約。'},
+{id:'q3106',module:'6.3',type:'fill',part:'一',question:'《南京條約》是清政府在 __________ 中戰敗後簽訂的不平等條約。',answer:'鴉片戰爭',explanation:'鴉片戰爭（1840-1842年）是中國近代第一次遭受西方列強入侵的戰爭，戰敗後簽訂《南京條約》。'},
+{id:'q3107',module:'6.3',type:'fill',part:'一',question:'在鴉片戰爭中，清政府戰敗，被迫與英國簽訂《南京條約》，割讓 __________。',answer:'香港島',explanation:'《南京條約》規定割讓香港島給英國，香港島從1842年起由英國管治，直至1997年回歸中國。'},
+{id:'q3108',module:'6.3',type:'fill',part:'一',question:'在鴉片戰爭後，__________ 先後侵略中國，清政府更因此簽訂了多項 __________ 條約。',answer:'列強／不平等',explanation:'鴉片戰爭後，英法俄美日等列強紛紛侵華，清政府被迫簽訂《北京條約》、《馬關條約》、《辛丑和約》等不平等條約。'},
+{id:'q3109',module:'6.3',type:'fill',part:'一',question:'在《北京條約》中，其中一項條款是要中國把 __________ 交予英國管治。',answer:'九龍半島',explanation:'1860年英法聯軍之役後，清政府被迫簽訂《北京條約》，將九龍半島（界限街以南）割讓給英國。'},
+{id:'q3110',module:'6.3',type:'fill',part:'一',question:'在 __________ 中，其中一項條款是把遼東半島、台灣及澎湖列島讓予日本。',answer:'《馬關條約》',explanation:'1895年中日甲午戰爭清朝戰敗，被迫簽訂《馬關條約》，割讓遼東半島、台灣及澎湖列島給日本。'},
+{id:'q3111',module:'6.3',type:'fill',part:'一',question:'在《辛丑和約》中，其中一項條款是要容許聯軍在北京至 __________ 一帶駐軍。',answer:'山海關',explanation:'1901年《辛丑和約》規定清政府須賠款、拆除炮台，並允許外國軍隊在北京至山海關一帶駐守。'},
+{id:'q3112',module:'6.3',type:'fill',part:'一',question:'孫中山成立 __________，組織有志救國人士參加革命活動。',answer:'中國同盟會',explanation:'1905年孫中山在日本東京成立中國同盟會，以「驅除韃虜、恢復中華、建立民國、平均地權」為革命綱領。'},
+{id:'q3113',module:'6.3',type:'fill',part:'一',question:'孫中山組織革命人士於1911年發動 __________ 推翻 __________ 政府，建立中華民國。',answer:'辛亥革命／清',explanation:'1911年辛亥革命成功推翻清朝，結束中國兩千多年的封建帝制，建立亞洲第一個民主共和國——中華民國。'},
+{id:'q3114',module:'6.3',type:'fill',part:'一',question:'1911年，__________ 起義成功，史稱「辛亥革命」。',answer:'武昌',explanation:'1911年10月10日，武昌起義爆發，革命軍佔領武漢三鎮，隨後各省紛紛響應，史稱「辛亥革命」。'},
+{id:'q3115',module:'6.3',type:'fill',part:'一',question:'1912年1月1日，孫中山先生成立了 __________，他被推舉為臨時大總統。',answer:'中華民國',explanation:'1912年1月1日，孫中山在南京宣誓就任中華民國臨時大總統，正式宣告中華民國成立。'},
 
 // ---- 6.3 填充題二（工作紙）----
 // 待上載
@@ -2234,17 +2234,58 @@ const App = {
     });
   },
 
+  MODULE_PARTS: {
+    '6.3': [
+      {type:'mc',     icon:'📚', name:'選擇題',     desc:'四選一',    parts:['一','二','三']},
+      {type:'fill',   icon:'🏮', name:'填充題',     desc:'填入答案',  parts:['一','二','三']},
+      {type:'classify',icon:'📝',name:'分類題',     desc:'分類整理',  parts:['一','二','三']},
+      {type:'scenario',icon:'🎯',name:'生活情景題', desc:'解決問題',  parts:null},
+      {type:'order',  icon:'🔢', name:'排序題',     desc:'按序排列',  parts:['一','二','三']},
+      {type:'match',  icon:'🔗', name:'配對題',     desc:'左右配對',  parts:['一','二','三']},
+      {type:'short',  icon:'✏️', name:'簡答題',     desc:'文字回答',  parts:['一','二','三']},
+      {type:'mixed',  icon:'⚡', name:'魔法挑戰！（混合）', desc:'所有題型混合 · 全面挑戰！', parts:null, fullSpan:true},
+    ],
+  },
+
   selectModule(mod) {
     STATE.currentModule = mod;
     document.getElementById('qtypeModTitle').textContent = mod + ' ' + this.moduleName(mod);
     AudioMgr.click();
+    const modParts = this.MODULE_PARTS[mod];
+    if (modParts) {
+      const grid = document.getElementById('qtypeGridDynamic');
+      grid.innerHTML = '';
+      modParts.forEach(cfg => {
+        if (cfg.parts) {
+          cfg.parts.forEach(p => {
+            const div = document.createElement('div');
+            div.className = 'qtype-card';
+            div.innerHTML = `<div class="qt-icon">${cfg.icon}</div><div class="qt-name">${cfg.name}${p}</div><div class="qt-desc">${cfg.desc}</div>`;
+            div.onclick = () => App.startQuiz(cfg.type, p);
+            grid.appendChild(div);
+          });
+        } else {
+          const div = document.createElement('div');
+          div.className = 'qtype-card' + (cfg.fullSpan ? ' full-span' : '');
+          div.innerHTML = `<div class="qt-icon">${cfg.icon}</div><div class="qt-name">${cfg.name}</div><div class="qt-desc">${cfg.desc}</div>`;
+          div.onclick = () => App.startQuiz(cfg.type);
+          grid.appendChild(div);
+        }
+      });
+      document.getElementById('qtypeGridStatic').style.display = 'none';
+      grid.style.display = 'grid';
+    } else {
+      document.getElementById('qtypeGridStatic').style.display = 'grid';
+      document.getElementById('qtypeGridDynamic').style.display = 'none';
+    }
     this.showScreen('screen-question-types');
   },
 
-  startQuiz(type) {
+  startQuiz(type, part) {
     STATE.currentQType = type;
     this.lastQuizModule = STATE.currentModule;
     this.lastQuizType = type;
+    this.lastQuizPart = part || null;
     AudioMgr.click();
 
     let qs = [];
@@ -2262,9 +2303,11 @@ const App = {
       qs = this.shuffle(qs).slice(0, 12);
     } else {
       qs = allQ.filter(q =>
-        (STATE.currentModule === 'all' || q.module === STATE.currentModule) && q.type === type
+        (STATE.currentModule === 'all' || q.module === STATE.currentModule) &&
+        q.type === type &&
+        (!part || q.part === part)
       );
-      qs = this.shuffle(qs).slice(0, 10);
+      qs = this.shuffle(qs).slice(0, 20);
     }
 
     if (qs.length === 0) { this.toast('此課題暫無此類型題目，請選擇其他題型！'); return; }
@@ -2274,7 +2317,7 @@ const App = {
   retryQuiz() {
     if (this.lastQuizModule && this.lastQuizType) {
       STATE.currentModule = this.lastQuizModule;
-      this.startQuiz(this.lastQuizType);
+      this.startQuiz(this.lastQuizType, this.lastQuizPart);
     } else {
       this.showScreen('screen-modules');
     }
@@ -2685,3 +2728,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
   }
 });
+

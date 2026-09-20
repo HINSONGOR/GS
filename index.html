@@ -187,7 +187,7 @@
         <h2 id="qtypeModTitle">選擇題型</h2>
         <div></div>
     </div>
-    <div class="qtype-grid">
+    <div class="qtype-grid" id="qtypeGridStatic">
         <div class="qtype-card" onclick="App.startQuiz('mc')">
             <div class="qt-icon">📚</div>
             <div class="qt-name">選擇題</div>
@@ -239,6 +239,7 @@
             <div class="qt-desc">所有題型混合 · 全面挑戰！</div>
         </div>
     </div>
+    <div class="qtype-grid" id="qtypeGridDynamic" style="display:none"></div>
 </div>
 
 <!-- ============ SCREEN: QUIZ ============ -->
