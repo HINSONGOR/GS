@@ -2316,7 +2316,7 @@ const App = {
         q.type === type &&
         (!part || q.part === part)
       );
-      qs = this.shuffle(qs).slice(0, 20);
+      qs = this.shuffle(qs);
     }
 
     if (qs.length === 0) { this.toast('此課題暫無此類型題目，請選擇其他題型！'); return; }
