@@ -2256,21 +2256,15 @@ const App = {
       const grid = document.getElementById('qtypeGridDynamic');
       grid.innerHTML = '';
       modParts.forEach(cfg => {
+        const div = document.createElement('div');
+        div.className = 'qtype-card' + (cfg.fullSpan ? ' full-span' : '');
+        div.innerHTML = `<div class="qt-icon">${cfg.icon}</div><div class="qt-name">${cfg.name}</div><div class="qt-desc">${cfg.desc}</div>`;
         if (cfg.parts) {
-          cfg.parts.forEach(p => {
-            const div = document.createElement('div');
-            div.className = 'qtype-card';
-            div.innerHTML = `<div class="qt-icon">${cfg.icon}</div><div class="qt-name">${cfg.name}${p}</div><div class="qt-desc">${cfg.desc}</div>`;
-            div.onclick = () => App.startQuiz(cfg.type, p);
-            grid.appendChild(div);
-          });
+          div.onclick = () => App.selectTypePart(cfg);
         } else {
-          const div = document.createElement('div');
-          div.className = 'qtype-card' + (cfg.fullSpan ? ' full-span' : '');
-          div.innerHTML = `<div class="qt-icon">${cfg.icon}</div><div class="qt-name">${cfg.name}</div><div class="qt-desc">${cfg.desc}</div>`;
           div.onclick = () => App.startQuiz(cfg.type);
-          grid.appendChild(div);
         }
+        grid.appendChild(div);
       });
       document.getElementById('qtypeGridStatic').style.display = 'none';
       grid.style.display = 'grid';
@@ -2279,6 +2273,21 @@ const App = {
       document.getElementById('qtypeGridDynamic').style.display = 'none';
     }
     this.showScreen('screen-question-types');
+  },
+
+  selectTypePart(cfg) {
+    document.getElementById('partScreenTitle').textContent = cfg.name;
+    const grid = document.getElementById('partGrid');
+    grid.innerHTML = '';
+    cfg.parts.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'qtype-card';
+      div.innerHTML = `<div class="qt-icon">${cfg.icon}</div><div class="qt-name">${cfg.name}${p}</div><div class="qt-desc">${cfg.desc}</div>`;
+      div.onclick = () => App.startQuiz(cfg.type, p);
+      grid.appendChild(div);
+    });
+    AudioMgr.click();
+    this.showScreen('screen-part-select');
   },
 
   startQuiz(type, part) {
