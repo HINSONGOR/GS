@@ -1819,27 +1819,40 @@ const QuizEngine = {
       sec.innerHTML = '<div class="stroke-order-label">✍️ 筆劃示範</div>';
       const row = document.createElement('div');
       row.className = 'stroke-order-row';
+      const writers = [];
       chineseChars.split('').forEach((char, ci) => {
         const wrap = document.createElement('div');
         wrap.className = 'stroke-char-wrap';
         const svgId = 'hwsvg_' + ci + '_' + Date.now();
-        wrap.innerHTML = `<svg id="${svgId}" xmlns="http://www.w3.org/2000/svg" width="72" height="72"></svg><div class="stroke-char-label">${char}</div>`;
+        wrap.innerHTML = `
+          <svg id="${svgId}" xmlns="http://www.w3.org/2000/svg" width="80" height="80"></svg>
+          <div class="stroke-char-label">${char}</div>
+          <button class="stroke-replay-btn" title="重播">🔄</button>`;
         row.appendChild(wrap);
         setTimeout(() => {
           try {
             const w = HanziWriter.create(svgId, char, {
-              width: 72, height: 72, padding: 6,
+              width: 80, height: 80, padding: 6,
               strokeColor: '#ffd700',
               outlineColor: 'rgba(255,255,255,0.12)',
-              strokeAnimationSpeed: 0.9,
-              delayBetweenStrokes: 120,
+              strokeAnimationSpeed: 0.8,
+              delayBetweenStrokes: 130,
             });
+            writers.push(w);
+            wrap.querySelector('.stroke-replay-btn').onclick = () => w.animateCharacter();
             wrap.querySelector('.stroke-char-label').onclick = () => w.animateCharacter();
             w.animateCharacter();
           } catch(e) {}
         }, 80 + ci * 40);
       });
+      const replayAll = document.createElement('button');
+      replayAll.className = 'stroke-replay-all-btn pixel-btn';
+      replayAll.textContent = '🔄 全部重播';
+      replayAll.onclick = () => {
+        writers.forEach((w, i) => setTimeout(() => w.animateCharacter(), i * 600));
+      };
       sec.appendChild(row);
+      sec.appendChild(replayAll);
       document.getElementById('feedbackArea').appendChild(sec);
     }
   },

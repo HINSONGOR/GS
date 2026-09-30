@@ -698,9 +698,28 @@ textarea.pixel-input { resize: vertical; }
   cursor: pointer;
 }
 .stroke-char-label {
-  font-size: 11px;
-  color: rgba(245,230,200,0.5);
+  font-size: 13px;
+  color: #ffd700;
+  font-weight: bold;
   cursor: pointer;
+  letter-spacing: 0.05em;
+}
+.stroke-replay-btn {
+  background: rgba(255,215,0,0.12);
+  border: 1px solid rgba(255,215,0,0.3);
+  border-radius: 6px;
+  color: #ffd700;
+  font-size: 14px;
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.stroke-replay-btn:hover { background: rgba(255,215,0,0.25); }
+.stroke-replay-all-btn {
+  margin-top: 12px;
+  font-size: 13px !important;
+  padding: 8px 20px !important;
+  width: 100%;
 }
 .hint-answer-box {
   margin-top: 10px;
