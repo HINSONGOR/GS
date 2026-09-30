@@ -1279,6 +1279,7 @@ const QuizEngine = {
             this.currentUserAnswer = i;
           }
           AudioMgr.click();
+          AudioMgr.speak(opt);
         };
         opts.appendChild(btn);
       });
@@ -1799,6 +1800,48 @@ const QuizEngine = {
       }
     }
     document.getElementById('teacherBody').textContent = q.explanation || '（沒有詳細解釋）';
+
+    // Stroke order for correct answer
+    const existingStroke = document.getElementById('strokeOrderSection');
+    if (existingStroke) existingStroke.remove();
+    let answerForStroke = '';
+    if (q.type === 'fill') {
+      answerForStroke = (q.answer || '').split('／')[0];
+    } else if (q.type === 'mc') {
+      const correctIdx = Array.isArray(q.answer) ? q.answer[0] : q.answer;
+      answerForStroke = q.options[correctIdx] || '';
+    }
+    const chineseChars = answerForStroke.replace(/[^一-鿿]/g, '').slice(0, 8);
+    if (chineseChars && typeof HanziWriter !== 'undefined') {
+      const sec = document.createElement('div');
+      sec.id = 'strokeOrderSection';
+      sec.className = 'stroke-order-section';
+      sec.innerHTML = '<div class="stroke-order-label">✍️ 筆劃示範</div>';
+      const row = document.createElement('div');
+      row.className = 'stroke-order-row';
+      chineseChars.split('').forEach((char, ci) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'stroke-char-wrap';
+        const svgId = 'hwsvg_' + ci + '_' + Date.now();
+        wrap.innerHTML = `<svg id="${svgId}" xmlns="http://www.w3.org/2000/svg" width="72" height="72"></svg><div class="stroke-char-label">${char}</div>`;
+        row.appendChild(wrap);
+        setTimeout(() => {
+          try {
+            const w = HanziWriter.create(svgId, char, {
+              width: 72, height: 72, padding: 6,
+              strokeColor: '#ffd700',
+              outlineColor: 'rgba(255,255,255,0.12)',
+              strokeAnimationSpeed: 0.9,
+              delayBetweenStrokes: 120,
+            });
+            wrap.querySelector('.stroke-char-label').onclick = () => w.animateCharacter();
+            w.animateCharacter();
+          } catch(e) {}
+        }, 80 + ci * 40);
+      });
+      sec.appendChild(row);
+      document.getElementById('feedbackArea').appendChild(sec);
+    }
   },
 
   skip() {
