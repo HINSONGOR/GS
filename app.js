@@ -509,7 +509,19 @@ const QUESTIONS = [
 {id:'q3620',module:'6.3',type:'short',part:'二',question:'美國分別向日本哪兩個地方投下原子彈？',answer:'廣島、長崎。',explanation:'1945年8月6日美國在廣島投下原子彈，8月9日再轟炸長崎，兩次核爆造成大量傷亡，促使日本宣佈投降。'},
 
 // ---- 6.3 簡答題三（工作紙）----
-// 待上載
+{id:'q3621',module:'6.3',type:'short',part:'三',question:'文化大革命發生在哪些年份？',answer:'1966年至1976年。',explanation:'文化大革命由毛澤東於1966年發動，直至1976年毛澤東逝世後才正式結束。'},
+{id:'q3622',module:'6.3',type:'short',part:'三',question:'文化大革命持續了多少年？',answer:'十年。',explanation:'文化大革命從1966年至1976年，歷時整整十年，對中國社會、經濟、文化造成深遠破壞。'},
+{id:'q3623',module:'6.3',type:'short',part:'三',question:'文化大革命期間，部分學生到處破壞古蹟和文物，造成哪方面的損失？',answer:'文化。',explanation:'紅衛兵破壞寺廟、文物、書籍等，對中國文化遺產造成無法挽回的文化損失。'},
+{id:'q3624',module:'6.3',type:'short',part:'三',question:'文化大革命期間，農民和工人做了甚麼影響經濟的事情？',answer:'農民和工人罷工，令生產停頓。',explanation:'文革期間農民和工人罷工，工廠和農田停產，導致糧食和物資嚴重短缺，經濟停滯。'},
+{id:'q3625',module:'6.3',type:'short',part:'三',question:'文化大革命期間，中國的經濟發展怎麼樣？',answer:'停滯不前。',explanation:'生產停頓、糧食短缺，令中國經濟發展完全停滯不前，人民生活陷入困境。'},
+{id:'q3626',module:'6.3',type:'short',part:'三',question:'哪位中國領導人在1978年提出推行改革開放政策？',answer:'鄧小平。',explanation:'鄧小平在1978年中共十一屆三中全會上提出改革開放，開啟中國現代化建設新時期。'},
+{id:'q3627',module:'6.3',type:'short',part:'三',question:'中國領導人鄧小平在哪年提出推行改革開放政策？',answer:'1978年。',explanation:'1978年12月，中共十一屆三中全會確立改革開放路線，由鄧小平主導推行。'},
+{id:'q3628',module:'6.3',type:'short',part:'三',question:'對內改革方面，中國在哪些地方推行改革？',answer:'農村和城市。',explanation:'改革開放首先在農村推行家庭聯產承包責任制，繼而在城市推行國企改革，全面提升生產力。'},
+{id:'q3629',module:'6.3',type:'short',part:'三',question:'在城市改革方面，國家准許發展哪種企業？',answer:'私營。',explanation:'改革開放允許私營企業發展，打破國家壟斷，促進競爭，創造大量就業機會。'},
+{id:'q3630',module:'6.3',type:'short',part:'三',question:'1980年代，中國開放了多少個地區成為經濟特區？',answer:'五個。',explanation:'1980年代，中國在廣東和福建設立深圳、珠海、汕頭、廈門及海南五個經濟特區。'},
+{id:'q3631',module:'6.3',type:'short',part:'三',question:'中國開放五個地區成為經濟特區，是為了甚麼？',answer:'吸引外來投資和建設。',explanation:'經濟特區提供稅務和土地優惠，吸引外資在內地設廠，帶動就業、技術引進和出口。'},
+{id:'q3632',module:'6.3',type:'short',part:'三',question:'中國開放的五個經濟特區在地理上有甚麼共通之處？',answer:'都是沿海地區、鄰近香港和澳門。（或其他合理的答案。）',explanation:'五個經濟特區均位於中國南方沿海，便於對外貿易及吸引港澳台和外國投資者。'},
+{id:'q3633',module:'6.3',type:'short',part:'三',question:'改革開放前，人民要主要以甚麼交通工具代步？',answer:'自行車。',explanation:'改革開放前中國人民以自行車為主要交通工具，改革後汽車、摩托車逐漸普及，交通大為改善。'},
 
 // ---- 6.4 分類題（工作紙）----
 {id:'q4101',module:'6.4',type:'classify',
