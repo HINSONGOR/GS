@@ -216,6 +216,9 @@ const QUESTIONS = [
 {id:'q3249',module:'6.3',type:'mc',part:'三',question:'以下哪種是改革開放前人民主要使用的交通工具？',options:['鐵路。','自行車。','飛機。','船隻。'],answer:1,explanation:'改革開放前，自行車是中國人民最普遍的交通工具，「自行車王國」是當時中國的寫照。'},
 {id:'q3250',module:'6.3',type:'mc',part:'三',multi:true,question:'改革開放前，人民的衣服是怎樣的？（答案可多於一個。）',options:['款式單一。','款式多元化。','平實。','時尚。'],answer:[0,2],explanation:'改革開放前，人民衣著款式單一（A）、以藍灰色為主，樸素平實（C），沒有多元化或時尚選擇。'},
 
+// ---- 6.3 選擇題四（工作紙）----
+// 待上載
+
 // ---- 6.3 填充題一（工作紙）----
 {id:'q3101',module:'6.3',type:'fill',part:'一',question:'__________ 皇帝執政期間，他整頓朝廷貪污風氣，令吏治清明，嚴查虧空，改善清朝財政體制。',answer:'雍正',explanation:'雍正帝（1722-1735年在位）以鐵腕整頓貪污，嚴查官員虧空，大力改革財政，令清朝國庫充實。'},
 {id:'q3102',module:'6.3',type:'fill',part:'一',question:'到了 __________ 皇帝晚年，清朝的國勢開始轉弱。',answer:'乾隆',explanation:'乾隆帝晚年寵信大貪官和珅，多次下江南耗費巨資，致國庫空虛、吏治腐敗，清朝盛極而衰。'},
@@ -2460,7 +2463,7 @@ const App = {
 
   MODULE_PARTS: {
     '6.3': [
-      {type:'mc',     icon:'📚', name:'選擇題',     desc:'四選一',    parts:['一','二','三']},
+      {type:'mc',     icon:'📚', name:'選擇題',     desc:'四選一',    parts:['一','二','三','四']},
       {type:'fill',   icon:'🏮', name:'填充題',     desc:'填入答案',  parts:['一','二','三']},
       {type:'classify',icon:'📝',name:'分類題',     desc:'分類整理',  parts:['一','二','三']},
       {type:'scenario',icon:'🎯',name:'生活情景題', desc:'解決問題',  parts:null},
