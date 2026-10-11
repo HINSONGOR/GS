@@ -523,6 +523,17 @@ const QUESTIONS = [
 {id:'q3632',module:'6.3',type:'short',part:'三',question:'中國開放的五個經濟特區在地理上有甚麼共通之處？',answer:'都是沿海地區、鄰近香港和澳門。（或其他合理的答案。）',explanation:'五個經濟特區均位於中國南方沿海，便於對外貿易及吸引港澳台和外國投資者。'},
 {id:'q3633',module:'6.3',type:'short',part:'三',question:'改革開放前，人民要主要以甚麼交通工具代步？',answer:'自行車。',explanation:'改革開放前中國人民以自行車為主要交通工具，改革後汽車、摩托車逐漸普及，交通大為改善。'},
 
+// ---- 6.3 簡答題四（工作紙）----
+{id:'q3634',module:'6.3',type:'short',part:'四',question:'大量農民為了生活前往城市工作，導致農村出現甚麼兒童？',answer:'留守兒童。',explanation:'父母進城打工，孩子留在農村由祖父母或親戚照顧，這些孩子被稱為「留守兒童」。'},
+{id:'q3635',module:'6.3',type:'short',part:'四',question:'急速的經濟發展下，社會出現了甚麼問題？舉出兩個例子。',answer:'物價上漲、空氣污染。（或其他合理的答案。）',explanation:'工業化帶來物價上漲、空氣污染、留守兒童等社會問題，是經濟發展的負面影響。'},
+{id:'q3636',module:'6.3',type:'short',part:'四',question:'超級電腦屬於甚麼科技？',answer:'資訊科技。',explanation:'超級電腦是資訊科技的重要成就，中國的「天河」系列曾多次登上全球超級電腦排行榜首位。'},
+{id:'q3637',module:'6.3',type:'short',part:'四',question:'雜交水稻有甚麼特點？',answer:'提升水稻產量和品質。',explanation:'袁隆平研發的雜交水稻大幅提高糧食產量，紓緩全球糧食短缺問題，是農業科技的重大突破。'},
+{id:'q3638',module:'6.3',type:'short',part:'四',question:'環保能源電動車有甚麼優點？',answer:'高效、安靜、環保。（或其他合理的答案。）',explanation:'電動車不排放廢氣（環保）、行駛安靜、能源效率高，有助減少城市空氣污染。'},
+{id:'q3639',module:'6.3',type:'short',part:'四',question:'中國在2001年加入哪個國際組織？',answer:'世界貿易組織。',explanation:'2001年12月11日中國正式加入世界貿易組織（WTO），標誌著中國全面融入全球貿易體系。'},
+{id:'q3640',module:'6.3',type:'short',part:'四',question:'中國在2008年舉辦了甚麼國際性體育盛事？',answer:'奧林匹克運動會。',explanation:'2008年北京奧運會（第29屆）於8月8日至24日舉行，中國以51面金牌位居金牌榜首。'},
+{id:'q3641',module:'6.3',type:'short',part:'四',question:'中國香港代表陳馮富珍在2007–2017年擔任了甚麼組織的總幹事？',answer:'世界衞生組織。',explanation:'陳馮富珍於2007年當選世界衞生組織總幹事，是首位擔任此職的中國人，任期至2017年。'},
+{id:'q3642',module:'6.3',type:'short',part:'四',question:'2015年，中國正式成立甚麼銀行？',answer:'亞洲基礎設施投資銀行。',explanation:'亞洲基礎設施投資銀行（亞投行）於2015年成立，由中國倡議，為亞洲各國基礎設施建設提供融資。'},
+
 // ---- 6.4 分類題（工作紙）----
 {id:'q4101',module:'6.4',type:'classify',
   question:'以下哪些制度和生活方式屬於香港？哪些屬於中國內地？把它們分類。\nA. 實行社會主義制度。\nB. 實行資本主義制度。\nC. 以港幣作為流通的貨幣。\nD. 以人民幣作為流通的貨幣。\nE. 採用簡體字。\nF. 採用繁體字。',
@@ -2553,7 +2564,7 @@ const App = {
       {type:'scenario',icon:'🎯',name:'生活情景題', desc:'解決問題',  parts:null},
       {type:'order',  icon:'🔢', name:'排序題',     desc:'按序排列',  parts:['一','二','三']},
       {type:'match',  icon:'🔗', name:'配對題',     desc:'左右配對',  parts:['一','二','三','四']},
-      {type:'short',  icon:'✏️', name:'簡答題',     desc:'文字回答',  parts:['一','二','三']},
+      {type:'short',  icon:'✏️', name:'簡答題',     desc:'文字回答',  parts:['一','二','三','四']},
       {type:'mixed',  icon:'⚡', name:'魔法挑戰！（混合）', desc:'所有題型混合 · 全面挑戰！', parts:null, fullSpan:true},
     ],
   },
