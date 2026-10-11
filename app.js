@@ -474,6 +474,16 @@ const QUESTIONS = [
 {id:'q3521',module:'6.3',type:'match',part:'三',question:'改革開放前，中國在以下方面的情況是怎樣的？',leftItems:['土地用途','交通','衣着'],rightItems:['A. 款式趨時。','B. 款式單一平實。','C. 有許多農田。','D. 交通網絡發展迅速。','E. 主要以自行車代步。'],answer:['C','E','B'],explanation:'改革開放前：土地以農田為主（C）、主要以自行車代步（E）、衣着款式單一平實（B）。'},
 {id:'q3522',module:'6.3',type:'match',part:'三',question:'改革開放後，中國在以下方面有甚麼轉變？',leftItems:['土地用途','交通','衣着'],rightItems:['A. 款式趨時。','B. 主要以汽車代步。','C. 有許多高樓大廈。','D. 交通網絡發展迅速。','E. 款式單一平實。'],answer:['C','D','A'],explanation:'改革開放後：農田變高樓大廈（C）、交通網絡迅速發展（D）、衣着款式趨時多樣（A）。'},
 
+// ---- 6.3 配對題四（工作紙）----
+{id:'q3523',module:'6.3',type:'match',part:'四',question:'把以下事件與相關的人物配對。',leftItems:['推行文化大革命','提出推行改革開放政策','推動「一帶一路」的發展'],rightItems:['A. 孫中山。','B. 鄧小平。','C. 毛澤東。','D. 習近平。'],answer:['C','B','D'],explanation:'毛澤東（C）發動文化大革命；鄧小平（B）提出改革開放；習近平（D）推動一帶一路。'},
+{id:'q3524',module:'6.3',type:'match',part:'四',question:'中國近年的經濟發展給以下方面帶來甚麼影響？',leftItems:['家庭','環境','工作'],rightItems:['A. 留守兒童增加。','B. 增加就業機會。','C. 收入下降。','D. 空氣污染嚴重。'],answer:['A','D','B'],explanation:'家庭（A）：農民工進城留守兒童增加；環境（D）：工業排放造成空氣污染；工作（B）：工廠增加就業機會。'},
+{id:'q3525',module:'6.3',type:'match',part:'四',question:'把以下的技術發展與相關的科技領域配對。',leftItems:['雜交水稻','能源電動車','超級電腦'],rightItems:['A. 資訊科技。','B. 能源科技。','C. 醫療科技。','D. 農業科技。'],answer:['D','B','A'],explanation:'雜交水稻（D）：農業科技；能源電動車（B）：能源科技；超級電腦（A）：資訊科技。'},
+{id:'q3526',module:'6.3',type:'match',part:'四',question:'把以下的科技領域與中國相關的成就配對。',leftItems:['能源科技','農業科技','資訊科技'],rightItems:['A. 雜交水稻。','B. 超級電腦。','C. 飛天戰車。','D. 能源電動車。'],answer:['D','A','B'],explanation:'能源科技（D）：能源電動車；農業科技（A）：雜交水稻；資訊科技（B）：超級電腦。'},
+{id:'q3527',module:'6.3',type:'match',part:'四',question:'把以下的科技發明與它們的特點配對。',leftItems:['超級電腦','雜交水稻','能源電動車'],rightItems:['A. 不會排出二氧化碳，有利環保。','B. 用於太空科研、大型飛機的設計和製造。','C. 用於廚餘轉化系統。','D. 有助提升產量和品質。'],answer:['B','D','A'],explanation:'超級電腦（B）：用於太空科研和大型飛機設計；雜交水稻（D）：提升糧食產量和品質；電動車（A）：零排放有利環保。'},
+{id:'q3528',module:'6.3',type:'match',part:'四',question:'把以下的事件與相關的年份配對。',leftItems:['北京舉辦奧林匹克運動會','中國加入世界貿易組織','香港代表當選世衞總幹事'],rightItems:['A. 2001年。','B. 2007年。','C. 2008年。','D. 2013年。'],answer:['C','A','B'],explanation:'北京奧運（C）：2008年；加入WTO（A）：2001年；陳馮富珍當選世衞總幹事（B）：2007年。'},
+{id:'q3529',module:'6.3',type:'match',part:'四',question:'中國在以下年份發生甚麼重要事件？把年份與相關的事件配對。',leftItems:['2001年','2008年','2017年'],rightItems:['A. 發起亞洲基礎設施投資銀行。','B. 倡議一帶一路經濟合作。','C. 舉辦奧林匹克運動會。','D. 加入世界貿易組織。'],answer:['D','C','B'],explanation:'2001年（D）：加入WTO；2008年（C）：北京奧運；2017年（B）：一帶一路高峰論壇。'},
+{id:'q3530',module:'6.3',type:'match',part:'四',question:'把以下的職位與相關的人物配對。',leftItems:['擔任聯合國教科文組織主席','擔任世界衞生組織總幹事','亞洲基礎設施投資銀行倡議者'],rightItems:['A. 陳馮富珍。','B. 鄧小平。','C. 郝平。','D. 習近平。'],answer:['C','A','D'],explanation:'聯合國教科文組織主席（C）：郝平；世衞總幹事（A）：陳馮富珍；亞投行倡議者（D）：習近平。'},
+
 // ---- 6.3 簡答題一（工作紙）----
 {id:'q3601',module:'6.3',type:'short',part:'一',question:'哪些皇帝為清朝帶來盛世？舉出兩個皇帝的名字。',answer:'康熙、雍正、乾隆。（其中兩個或其他合理答案。）',explanation:'清朝盛世由康熙、雍正、乾隆三位皇帝締造，合稱「康雍乾盛世」，是清朝最鼎盛的時期。'},
 {id:'q3602',module:'6.3',type:'short',part:'一',question:'到了哪個皇帝的晚年，中國國勢開始轉弱？',answer:'乾隆皇帝。',explanation:'乾隆晚年寵信和珅，吏治腐敗，加上多次南巡耗費大量財富，清朝國勢自此走下坡。'},
@@ -2530,7 +2540,7 @@ const App = {
       {type:'classify',icon:'📝',name:'分類題',     desc:'分類整理',  parts:['一','二','三','四']},
       {type:'scenario',icon:'🎯',name:'生活情景題', desc:'解決問題',  parts:null},
       {type:'order',  icon:'🔢', name:'排序題',     desc:'按序排列',  parts:['一','二','三']},
-      {type:'match',  icon:'🔗', name:'配對題',     desc:'左右配對',  parts:['一','二','三']},
+      {type:'match',  icon:'🔗', name:'配對題',     desc:'左右配對',  parts:['一','二','三','四']},
       {type:'short',  icon:'✏️', name:'簡答題',     desc:'文字回答',  parts:['一','二','三']},
       {type:'mixed',  icon:'⚡', name:'魔法挑戰！（混合）', desc:'所有題型混合 · 全面挑戰！', parts:null, fullSpan:true},
     ],
