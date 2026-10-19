@@ -1142,6 +1142,11 @@ const QUESTIONS = [
 {id:'qN034',module:'NGS6.5',type:'fill',question:'______ have dry skin and breathe with lungs.',answer:'Reptiles'},
 {id:'qN035',module:'NGS6.5',type:'fill',question:'______ have hair on their bodies and feed their young with milk.',answer:'Mammals'},
 {id:'qN036',module:'NGS6.5',type:'fill',question:'______ breathe with gills and are usually covered with scales.',answer:'Fish'},
+{id:'qN037',module:'NGS6.5',type:'fill',question:'Some plants growing in tropical rainforests have ______ roots to support their growth and get more sunlight.',answer:'buttress'},
+{id:'qN038',module:'NGS6.5',type:'fill',question:'Some plants growing in wetlands have ______ roots to absorb oxygen from the air.',answer:'aerial'},
+{id:'qN039',module:'NGS6.5',type:'fill',question:'Cacti grow in deserts. They have ______ stems to store a lot of water.',answer:'thick'},
+{id:'qN040',module:'NGS6.5',type:'fill',question:'Lotuses grow in wetlands. As there is a lack of oxygen in the soil, their stems develop underground and have ______ to facilitate gaseous exchange.',answer:'holes'},
+{id:'qN041',module:'NGS6.5',type:'fill',question:'______ plants grow by twining their stems around trees to reach more sunlight.',answer:'Climbing'},
 
 // ---- Reading Passages ----
 const PASSAGES = [
