@@ -2658,7 +2658,7 @@ const App = {
   },
 
   updateModuleProgress() {
-    ['6.1','6.2','6.3','6.4','6.5','6.6'].forEach(mod => {
+    ['6.1','6.2','6.3','6.4','6.5','6.6','NGS6.5'].forEach(mod => {
       const s = STATE.stats.byModule[mod];
       const p = s && s.answered > 0 ? Math.round(s.correct/s.answered*100) : 0;
       const el = document.getElementById('mprog-' + mod);
@@ -2669,6 +2669,16 @@ const App = {
   },
 
   MODULE_PARTS: {
+    'NGS6.5': [
+      {type:'mc',     icon:'📚', name:'選擇題',     desc:'四選一',    parts:null},
+      {type:'fill',   icon:'🏮', name:'填充題',     desc:'填入答案',  parts:null},
+      {type:'classify',icon:'📝',name:'分類題',     desc:'分類整理',  parts:null},
+      {type:'scenario',icon:'🎯',name:'生活情景題', desc:'解決問題',  parts:null},
+      {type:'order',  icon:'🔢', name:'排序題',     desc:'按序排列',  parts:null},
+      {type:'match',  icon:'🔗', name:'配對題',     desc:'左右配對',  parts:null},
+      {type:'short',  icon:'✏️', name:'簡答題',     desc:'文字回答',  parts:null},
+      {type:'mixed',  icon:'⚡', name:'魔法挑戰！（混合）', desc:'所有題型混合 · 全面挑戰！', parts:null, fullSpan:true},
+    ],
     '6.3': [
       {type:'mc',     icon:'📚', name:'選擇題',     desc:'四選一',    parts:['一','二','三','四']},
       {type:'fill',   icon:'🏮', name:'填充題',     desc:'填入答案',  parts:['一','二','三','四']},
@@ -2831,7 +2841,7 @@ const App = {
   },
 
   moduleName(mod) {
-    const names = {'6.1':'處變不驚','6.2':'科技天地','6.3':'中國的變遷','6.4':'香港特別行政區','6.5':'生物世界','6.6':'放眼世界'};
+    const names = {'6.1':'處變不驚','6.2':'科技天地','6.3':'中國的變遷','6.4':'香港特別行政區','6.5':'生物世界','6.6':'放眼世界','NGS6.5':'New General Studies'};
     return names[mod] || mod;
   },
 
@@ -2928,7 +2938,7 @@ function gsShowParent(){
   const todayMins=Math.floor(todaySecs/60);
   const total=STATE.stats.totalAnswered||0;
   const acc=total>0?Math.round(STATE.stats.totalCorrect/total*100)+'%':'—';
-  const MODS=['6.1','6.2','6.3','6.4','6.5','6.6'];
+  const MODS=['6.1','6.2','6.3','6.4','6.5','6.6','NGS6.5'];
   const NAMES={'6.1':'6.1 處變不驚','6.2':'6.2 科技天地','6.3':'6.3 中國的變遷','6.4':'6.4 香港特別行政區','6.5':'6.5 生物世界','6.6':'6.6 放眼世界'};
   const mods=MODS.map(k=>[k,STATE.stats.byModule[k]||{answered:0,correct:0}]);
   const weak=mods.filter(([k,st])=>st.answered>=3&&st.correct/st.answered<0.6);
