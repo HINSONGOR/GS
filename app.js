@@ -1156,6 +1156,42 @@ const QUESTIONS = [
 {id:'qN050',module:'NGS6.5',type:'fill',question:'______ have long and powerful forelegs lined with spikes, which allow them to hold their prey firmly.',answer:'Mantises'},
 {id:'qN051',module:'NGS6.5',type:'fill',question:'______ have a long beak with a throat pouch to store food.',answer:'Pelicans'},
 
+// ---- NGS6.5 配對題 ----
+{id:'qN052',module:'NGS6.5',type:'match',question:'Which categories do the following animals belong to?',left:['1. Eagles','2. Giraffes','3. Sea horses','4. Butterflies'],options:['A. Fish','B. Insects','C. Mammals','D. Birds'],answer:['D','C','A','B']},
+{id:'qN053',module:'NGS6.5',type:'match',question:'Which categories do the following animals belong to?',left:['1. Whales','2. Penguins','3. Crocodiles','4. Ladybirds'],options:['A. Insects','B. Reptiles','C. Mammals','D. Birds'],answer:['C','D','B','A']},
+{id:'qN054',module:'NGS6.5',type:'match',question:'Match the following groups of animals with their characteristics.',left:['1. Fish','2. Birds','3. Reptiles','4. Insects'],options:['A. Swim with fins','B. Have dry skin or hard shells','C. Have feathers on the body','D. Have three pairs of legs'],answer:['A','C','B','D']},
+{id:'qN055',module:'NGS6.5',type:'match',question:'Match the following groups of animals with their characteristics.',left:['1. Birds','2. Mammals','3. Fish'],options:['A. Feed their young with milk','B. Breathe with gills','C. Have three pairs of legs','D. Have feathers'],answer:['D','A','B']},
+{id:'qN056',module:'NGS6.5',type:'match',question:'What are the functions of the following types of roots in different environments?',left:['1. Deserts (dry)','2. Wetlands (low oxygen in soil)','3. Rainforests (little sunlight on ground)'],options:['A. Buttress roots','B. Aerial roots','C. Deep roots','D. Shallow roots'],answer:['C','B','A']},
+{id:'qN057',module:'NGS6.5',type:'match',question:'What are the functions of the following types of leaves?',left:['1. Leaves with a smooth surface','2. Broad leaves','3. Needle-shaped leaves','4. Winter-shedding leaves'],options:['A. Reduce nutrient loss','B. Shed excess water','C. Get more sunlight','D. Reduce water loss'],answer:['B','C','D','A']},
+{id:'qN058',module:'NGS6.5',type:'match',question:'Where do the following animals live?',left:['1. Toucans','2. Giraffes','3. Harp seals','4. Sand rats'],options:['A. Polar regions','B. Tropical rainforests','C. Tropical grasslands','D. Deserts'],answer:['B','C','A','D']},
+{id:'qN059',module:'NGS6.5',type:'match',question:'How do the following animals protect themselves?',left:['1. Sardines','2. Porcupines','3. Poison dart frogs'],options:['A. Have sharp quills','B. Have bodies with bright colours to warn predators','C. Look like dried leaves and are hard to find','D. Scare predators away by staying together'],answer:['D','A','B']},
+{id:'qN060',module:'NGS6.5',type:'match',question:'How do the following plants protect themselves?',left:['1. Sensitive plants','2. Oleanders','3. Lithops'],options:['A. Their leaves close if they are touched.','B. They look like stones.','C. They are poisonous.','D. Their flowers smell strange.'],answer:['A','C','B']},
+{id:'qN061',module:'NGS6.5',type:'match',question:'How do the following characteristics help the animals or plants?',left:['1. African tortoises have thick scales.','2. Penguins have thick feathers.','3. Porcupines have sharp quills on their back.'],options:['A. Reduce water loss in a hot and dry environment','B. Reduce heat loss in a cold environment','C. Help tear their prey apart','D. Keep their predators away'],answer:['A','B','D']},
+{id:'qN062',module:'NGS6.5',type:'match',question:'Which category does each animal belong to? (Animals with backbones or without backbones?)',left:['1. Parrots','2. Bees','3. Frogs','4. Starfish','5. Jellyfish','6. Snakes'],options:['A. Animals with backbones','B. Animals without backbones'],answer:['A','B','A','B','B','A']},
+{id:'qN063',module:'NGS6.5',type:'match',question:'Is each of the following an insect or an amphibian?',left:['1. Salamanders','2. Common five-ring butterflies','3. Bees','4. Grasshoppers','5. Ants','6. Poison dart frogs'],options:['A. Insects','B. Amphibians'],answer:['B','A','A','A','A','B']},
+{id:'qN064',module:'NGS6.5',type:'match',question:'Is each characteristic of an arctic hare or a desert cottontail?',left:['1. Thicker and longer fur','2. Thinner and shorter fur','3. Bigger ears','4. Smaller ears','5. White fur','6. Dark grey fur'],options:['A. Arctic hare','B. Desert cottontail'],answer:['A','B','B','A','A','B']},
+{id:'qN065',module:'NGS6.5',type:'match',question:'Does each plant have flowers that can be spotted easily or not?',left:['1. Rose','2. Daffodil','3. Rice plant','4. Water lily','5. Reed'],options:['A. Flowers easily spotted','B. Flowers not easily spotted'],answer:['A','A','B','A','B']},
+{id:'qN066',module:'NGS6.5',type:'match',question:'Is each of the following a mammal or a reptile?',left:['1. Sea turtles','2. Seals','3. Crocodiles','4. Lizards','5. Dolphins'],options:['A. Mammals','B. Reptiles'],answer:['B','A','B','B','A']},
+
+// ---- NGS6.5 排序題 ----
+{id:'qN067',module:'NGS6.5',type:'order',question:'Arrange the following mammals by size from large to small.',items:[{key:'A',text:'Leopard'},{key:'B',text:'Lion'},{key:'C',text:'Cat'},{key:'D',text:'Whale'}],answer:['D','B','A','C']},
+{id:'qN068',module:'NGS6.5',type:'order',question:'Arrange the following sea animals by size from large to small.',items:[{key:'A',text:'Dolphin'},{key:'B',text:'Whale'},{key:'C',text:'Sardine'},{key:'D',text:'Salmon'}],answer:['B','A','D','C']},
+{id:'qN069',module:'NGS6.5',type:'order',question:'Arrange the following environments by rainfall from low to high.',items:[{key:'A',text:'Tropical rainforests'},{key:'B',text:'Deserts'},{key:'C',text:'Tropical grasslands'}],answer:['B','C','A']},
+
+// ---- NGS6.5 簡答題 ----
+{id:'qN070',module:'NGS6.5',type:'short',question:'What is the smallest bird in the world?',answer:'Hummingbird.'},
+{id:'qN071',module:'NGS6.5',type:'short',question:'What is the largest mammal in the world now?',answer:'Blue whale／Whale.'},
+{id:'qN072',module:'NGS6.5',type:'short',question:'Is the pine tree an evergreen or deciduous plant?',answer:'Evergreen.'},
+{id:'qN073',module:'NGS6.5',type:'short',question:'What is the largest bird in the world?',answer:'Ostrich.'},
+{id:'qN074',module:'NGS6.5',type:'short',question:'What is the largest mammal on land?',answer:'Elephant.'},
+{id:'qN075',module:'NGS6.5',type:'short',question:'What is the most diverse group of animals?',answer:'Insects／Animals without backbones.'},
+{id:'qN076',module:'NGS6.5',type:'short',question:'What kind of environment does aloe vera grow in?',answer:'Dry environments.'},
+{id:'qN077',module:'NGS6.5',type:'short',question:'What organs do frogs use for breathing?',answer:'Lungs and skin.'},
+{id:'qN078',module:'NGS6.5',type:'short',question:'What organ do dolphins breathe with?',answer:'Lungs.'},
+{id:'qN079',module:'NGS6.5',type:'short',question:'What do ducks use their webbed feet for?',answer:'Swimming and walking.'},
+{id:'qN080',module:'NGS6.5',type:'short',question:'What animal is known as "the ship of the desert"?',answer:'Camel.'},
+{id:'qN081',module:'NGS6.5',type:'short',question:'In estimation, which land environment has about half of the animal species on the Earth?',answer:'Tropical rainforests.'},
+
 ];
 
 // ---- Reading Passages ----
