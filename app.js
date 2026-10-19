@@ -1152,6 +1152,11 @@ const QUESTIONS = [
 {id:'qN044',module:'NGS6.5',type:'fill',question:'Some animals go into deep sleep in winter to save ______.',answer:'energy'},
 {id:'qN045',module:'NGS6.5',type:'fill',question:'Poison dart frogs use the ______ colours on their bodies to protect themselves from predators.',answer:'bright'},
 {id:'qN046',module:'NGS6.5',type:'fill',question:'African snails go into deep sleep in the dry ______ to reduce water loss.',answer:'summer'},
+{id:'qN047',module:'NGS6.5',type:'fill',question:'Some ______ can change their skin colours in different environments.',answer:'lizards'},
+{id:'qN048',module:'NGS6.5',type:'fill',question:'______ have a long and narrow beak so that they can suck nectar from flowers easily.',answer:'Hummingbirds'},
+{id:'qN049',module:'NGS6.5',type:'fill',question:'______ have sharp teeth to tear and bite their prey.',answer:'Lions'},
+{id:'qN050',module:'NGS6.5',type:'fill',question:'______ have long and powerful forelegs lined with spikes, which allow them to hold their prey firmly.',answer:'Mantises'},
+{id:'qN051',module:'NGS6.5',type:'fill',question:'______ have a long beak with a throat pouch to store food.',answer:'Pelicans'},
 
 // ---- Reading Passages ----
 const PASSAGES = [
