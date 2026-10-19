@@ -1147,6 +1147,11 @@ const QUESTIONS = [
 {id:'qN039',module:'NGS6.5',type:'fill',question:'Cacti grow in deserts. They have ______ stems to store a lot of water.',answer:'thick'},
 {id:'qN040',module:'NGS6.5',type:'fill',question:'Lotuses grow in wetlands. As there is a lack of oxygen in the soil, their stems develop underground and have ______ to facilitate gaseous exchange.',answer:'holes'},
 {id:'qN041',module:'NGS6.5',type:'fill',question:'______ plants grow by twining their stems around trees to reach more sunlight.',answer:'Climbing'},
+{id:'qN042',module:'NGS6.5',type:'fill',question:'Polar bears and penguins have thick fur and a thick layer of ______, which can keep them warm in cold weather.',answer:'fat'},
+{id:'qN043',module:'NGS6.5',type:'fill',question:'Tortoises in deserts have scales that can reduce ______ loss in the dry environment.',answer:'water'},
+{id:'qN044',module:'NGS6.5',type:'fill',question:'Some animals go into deep sleep in winter to save ______.',answer:'energy'},
+{id:'qN045',module:'NGS6.5',type:'fill',question:'Poison dart frogs use the ______ colours on their bodies to protect themselves from predators.',answer:'bright'},
+{id:'qN046',module:'NGS6.5',type:'fill',question:'African snails go into deep sleep in the dry ______ to reduce water loss.',answer:'summer'},
 
 // ---- Reading Passages ----
 const PASSAGES = [
