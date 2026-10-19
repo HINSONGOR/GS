@@ -1137,6 +1137,11 @@ const QUESTIONS = [
 {id:'qN029',module:'NGS6.5',type:'fill',question:'The growth of plants is affected by temperature and ______. To adapt to different ______, plants have developed different roots, stems and leaves.',answer:'rainfall／environments'},
 {id:'qN030',module:'NGS6.5',type:'fill',question:'______ have dry skin, as well as dry and hard scales on their bodies. ______ have wet skin and are usually covered with scales.',answer:'Reptiles／Fish'},
 {id:'qN031',module:'NGS6.5',type:'fill',question:'When classifying animals, we should think about the ______ characteristics. For example, female mammals feed their young with milk.',answer:'distinctive'},
+{id:'qN032',module:'NGS6.5',type:'fill',question:'______ have moist skin and do not have scales.',answer:'Amphibians'},
+{id:'qN033',module:'NGS6.5',type:'fill',question:'______ have three pairs of legs and a pair of antennae on their heads.',answer:'Insects'},
+{id:'qN034',module:'NGS6.5',type:'fill',question:'______ have dry skin and breathe with lungs.',answer:'Reptiles'},
+{id:'qN035',module:'NGS6.5',type:'fill',question:'______ have hair on their bodies and feed their young with milk.',answer:'Mammals'},
+{id:'qN036',module:'NGS6.5',type:'fill',question:'______ breathe with gills and are usually covered with scales.',answer:'Fish'},
 
 // ---- Reading Passages ----
 const PASSAGES = [
