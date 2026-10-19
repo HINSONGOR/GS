@@ -1191,6 +1191,22 @@ const QUESTIONS = [
 {id:'qN079',module:'NGS6.5',type:'short',question:'What do ducks use their webbed feet for?',answer:'Swimming and walking.'},
 {id:'qN080',module:'NGS6.5',type:'short',question:'What animal is known as "the ship of the desert"?',answer:'Camel.'},
 {id:'qN081',module:'NGS6.5',type:'short',question:'In estimation, which land environment has about half of the animal species on the Earth?',answer:'Tropical rainforests.'},
+{id:'qN082',module:'NGS6.5',type:'short',question:'Name one reptile.',answer:'Chameleon／Tortoise／Turtle／Snake. (Any one reasonable answer.)'},
+{id:'qN083',module:'NGS6.5',type:'short',question:'Which group of animals with backbones do bats belong to?',answer:'Mammals.'},
+{id:'qN084',module:'NGS6.5',type:'short',question:'What group of animals with backbones do sea turtles belong to?',answer:'Reptiles.'},
+{id:'qN085',module:'NGS6.5',type:'short',question:'Name one non-flowering plant.',answer:'Moss／Fern／Pine. (Any one reasonable answer.)'},
+{id:'qN086',module:'NGS6.5',type:'short',question:'Give two examples of flowering plants.',answer:'Daffodil／Bauhinia／Sunflower／Golden trumpet. (Any two reasonable answers.)'},
+{id:'qN087',module:'NGS6.5',type:'short',question:'How do cacti adapt to the environment in deserts with needle-shaped leaves?',answer:'Reduce water loss.'},
+{id:'qN088',module:'NGS6.5',type:'short',question:'Name one feature that helps plants adapt to the environment in wetlands.',answer:'Aerial roots which grow above the ground／Waxy leaves. (Any one reasonable answer.)'},
+{id:'qN089',module:'NGS6.5',type:'short',question:'Some plants in tropical rainforests grow tall to absorb more sunlight. What is special about their roots?',answer:'They have buttress roots.'},
+{id:'qN090',module:'NGS6.5',type:'short',question:'Climbing plants grow around trees to climb up. How does this feature help the plants adapt to the environment in tropical rainforests?',answer:'It helps the plants reach more sunlight.'},
+{id:'qN091',module:'NGS6.5',type:'short',question:'Wetland soil lacks oxygen. How do the stems of lotuses absorb more oxygen?',answer:'Through holes in the stems.'},
+{id:'qN092',module:'NGS6.5',type:'short',question:'Why do climbing plants growing in tropical rainforests twine their stems around trees?',answer:'To reach more sunlight.'},
+{id:'qN093',module:'NGS6.5',type:'short',question:'What characteristics do polar bears have to survive in the cold environment? Give one example.',answer:'Thick fur／A thick layer of fat under their skin／Small ears. (Any one reasonable answer.)'},
+{id:'qN094',module:'NGS6.5',type:'short',question:'Name one animal that can blend into the surroundings.',answer:'Grasshopper／Lion／Young seal／Leafy sea dragon／Stick insect. (Any one reasonable answer.)'},
+{id:'qN095',module:'NGS6.5',type:'short',question:'Name one animal that can warn predators with their bodies.',answer:'Porcupine／Poison dart frog／Common five-ring butterfly. (Any one reasonable answer.)'},
+{id:'qN096',module:'NGS6.5',type:'short',question:'Hummingbirds have a long and narrow beak. What food can this feature help them get?',answer:'Nectar.'},
+{id:'qN097',module:'NGS6.5',type:'short',question:'How are plants classified?',answer:'Flowering plants and non-flowering plants／Land plants and water plants. (Any reasonable answer.)'},
 
 ];
 
