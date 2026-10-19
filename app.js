@@ -1119,6 +1119,25 @@ const QUESTIONS = [
 {id:'qN013',module:'NGS6.5',type:'mc',question:'Some animals like squirrels and snakes go into deep sleep in winter. How does it help them survive the cold winter?',options:['They can grow faster.','They can save energy.','They can be safe from being eaten.','They can protect their home.'],answer:1,explanation:'Hibernation (deep winter sleep) allows animals to save energy during the cold months when food is scarce, as their body temperature drops and metabolic rate slows dramatically.'},
 {id:'qN014',module:'NGS6.5',type:'mc',question:'Which of the following animals protect themselves by warning other animals?',options:['Grasshoppers','Porcupines','Leafy sea dragons','Sardines'],answer:1,explanation:'Porcupines protect themselves by raising their sharp quills as a warning to predators. This is a form of self-defence that warns other animals to stay away.'},
 
+// ---- NGS6.5 填充題 ----
+{id:'qN015',module:'NGS6.5',type:'fill',question:'Both crocodiles and snakes belong to the category of ______.',answer:'reptiles／animals with backbones'},
+{id:'qN016',module:'NGS6.5',type:'fill',question:'Both birds and reptiles breathe with ______. Fish, however, breathe with ______.',answer:'lungs／gills'},
+{id:'qN017',module:'NGS6.5',type:'fill',question:'The body of insects is divided into ______, ______ and ______.',answer:'head／thorax／abdomen'},
+{id:'qN018',module:'NGS6.5',type:'fill',question:'Most fish have ______ on their bodies. They swim with their ______.',answer:'scales／fins'},
+{id:'qN019',module:'NGS6.5',type:'fill',question:'Moss and ferns are common ______ plants.',answer:'non-flowering'},
+{id:'qN020',module:'NGS6.5',type:'fill',question:'Plants in wetlands have aerial roots to get more ______ in the air.',answer:'oxygen'},
+{id:'qN021',module:'NGS6.5',type:'fill',question:'Lotuses grow in wetlands. Their stems have ______ to store more oxygen.',answer:'holes'},
+{id:'qN022',module:'NGS6.5',type:'fill',question:'Wetland soil lacks oxygen. The stems of lotuses have ______ to facilitate gaseous exchange.',answer:'holes'},
+{id:'qN023',module:'NGS6.5',type:'fill',question:'The thick stem of cacti can store a lot of ______ to enable the plant to live in ______ places.',answer:'water／dry'},
+{id:'qN024',module:'NGS6.5',type:'fill',question:'There is high ______ content in the soil of wetlands. Some mangroves have thick and waxy leaves to reduce ______ loss.',answer:'salt／water'},
+{id:'qN025',module:'NGS6.5',type:'fill',question:'Plants can be classified according to where they grow. Flame tree is a ______ plant. Water lily is a ______ plant.',answer:'land／water'},
+{id:'qN026',module:'NGS6.5',type:'fill',question:'To adapt to the environment, snakes go into ______ to save energy and some birds ______ to warmer places during winter.',answer:'deep sleep／migrate'},
+{id:'qN027',module:'NGS6.5',type:'fill',question:'Grasshoppers have ______ that match the surroundings. They can ______ from their predators.',answer:'body colours／hide'},
+{id:'qN028',module:'NGS6.5',type:'fill',question:'Zebras usually live in ______ to protect themselves from enemies.',answer:'groups'},
+{id:'qN029',module:'NGS6.5',type:'fill',question:'The growth of plants is affected by temperature and ______. To adapt to different ______, plants have developed different roots, stems and leaves.',answer:'rainfall／environments'},
+{id:'qN030',module:'NGS6.5',type:'fill',question:'______ have dry skin, as well as dry and hard scales on their bodies. ______ have wet skin and are usually covered with scales.',answer:'Reptiles／Fish'},
+{id:'qN031',module:'NGS6.5',type:'fill',question:'When classifying animals, we should think about the ______ characteristics. For example, female mammals feed their young with milk.',answer:'distinctive'},
+
 // ---- Reading Passages ----
 const PASSAGES = [
   {
