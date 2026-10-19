@@ -1101,8 +1101,6 @@ const QUESTIONS = [
 {id:'q4364',module:'6.4',type:'fill',question:'【供詞：裁判法院、區域法院、道德判決、終審法院、高等法院、司法獨立】\n________審理較輕微的案件，一般監禁刑期不超過兩年。',answer:'裁判法院',explanation:'裁判法院（Magistrates Court）處理輕微刑事案件，是香港最繁忙的法院，處理大量日常案件。'},
 {id:'q4365',module:'6.4',type:'fill',question:'【供詞：裁判法院、區域法院、道德判決、終審法院、高等法院、司法獨立】\n香港奉行________的精神，司法機關不受行政或立法機關的干預。',answer:'司法獨立',explanation:'司法獨立是香港法治的核心，確保法院不受政治壓力影響，能公正裁決每宗案件。'},
 
-];
-
 // ---- NGS6.5 選擇題（工作紙）----
 {id:'qN001',module:'NGS6.5',type:'mc',question:'Which of the following is NOT a characteristic of mammals?',options:['They have feathers on their feet.','They have hair on their bodies.','They breathe with lungs.','Females feed their babies with milk.'],answer:0,explanation:'Mammals have hair (not feathers), breathe with lungs, and females nurse their young with milk. Feathers are a characteristic of birds, not mammals.'},
 {id:'qN002',module:'NGS6.5',type:'mc',question:'Which of the following are mammals?',options:['Bats','Salamanders','Crocodiles','Frogs'],answer:0,explanation:'Bats are the only mammals listed. They have hair, give birth to live young and nurse with milk. Salamanders are amphibians, crocodiles are reptiles, and frogs are amphibians.'},
@@ -1157,6 +1155,8 @@ const QUESTIONS = [
 {id:'qN049',module:'NGS6.5',type:'fill',question:'______ have sharp teeth to tear and bite their prey.',answer:'Lions'},
 {id:'qN050',module:'NGS6.5',type:'fill',question:'______ have long and powerful forelegs lined with spikes, which allow them to hold their prey firmly.',answer:'Mantises'},
 {id:'qN051',module:'NGS6.5',type:'fill',question:'______ have a long beak with a throat pouch to store food.',answer:'Pelicans'},
+
+];
 
 // ---- Reading Passages ----
 const PASSAGES = [
