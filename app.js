@@ -466,7 +466,15 @@ const QUESTIONS = [
   explanation:'清廷腐敗→容許義和團作亂→八國聯軍佔領北京→簽訂《辛丑和約》。'},
 
 // ---- 6.3 排序題二（工作紙）----
-// 待上載
+{id:'q3403b',module:'6.3',type:'order',part:'二',question:'把日本侵略中國的經過順序排列出來。',
+  items:[{key:'A',text:'中國得到英、美等國的援助，力量加強。'},{key:'B',text:'日軍攻陷南京，展開南京大屠殺。'},{key:'C',text:'香港淪陷。'},{key:'D',text:'日本宣佈投降。'},{key:'E',text:'盧溝橋事變。'}],
+  answer:['E','B','C','A','D'],explanation:'盧溝橋事變（E，1937）→南京大屠殺（B，1937年底）→香港淪陷（C，1941）→盟國援助（A）→日本投降（D，1945）。'},
+{id:'q3404b',module:'6.3',type:'order',part:'二',question:'把抗日戰爭的經過順序排列出來。',
+  items:[{key:'A',text:'南京大屠殺。'},{key:'B',text:'盧溝橋事變。'},{key:'C',text:'美國投擲原子彈。'},{key:'D',text:'香港淪陷。'},{key:'E',text:'日本戰敗投降。'}],
+  answer:['B','A','D','C','E'],explanation:'盧溝橋事變（B，1937）→南京大屠殺（A，1937年底）→香港淪陷（D，1941）→原子彈（C，1945年8月）→日本投降（E，1945年8月）。'},
+{id:'q3405b',module:'6.3',type:'order',part:'二',question:'把以下中國近代的歷史事件按先後次序排列出來。',
+  items:[{key:'A',text:'辛亥革命。'},{key:'B',text:'鴉片戰爭。'},{key:'C',text:'八國聯軍之役。'},{key:'D',text:'抗日戰爭。'}],
+  answer:['B','C','A','D'],explanation:'鴉片戰爭（B，1840）→八國聯軍（C，1900）→辛亥革命（A，1911）→抗日戰爭（D，1937–1945）。'}
 
 // ---- 6.3 排序題三（工作紙）----
 {id:'q3403',module:'6.3',type:'order',part:'三',question:'把改革開放前後發生的事按次序排列出來。',
@@ -2811,7 +2819,7 @@ const App = {
       {type:'fill',   icon:'🏮', name:'填充題',     desc:'填入答案',  parts:['一','二','三','四']},
       {type:'classify',icon:'📝',name:'分類題',     desc:'分類整理',  parts:['一','二','三','四']},
       {type:'scenario',icon:'🎯',name:'生活情景題', desc:'解決問題',  parts:null},
-      {type:'order',  icon:'🔢', name:'排序題',     desc:'按序排列',  parts:['一','三']},
+      {type:'order',  icon:'🔢', name:'排序題',     desc:'按序排列',  parts:['一','二','三']},
       {type:'match',  icon:'🔗', name:'配對題',     desc:'左右配對',  parts:['一','二','三','四']},
       {type:'short',  icon:'✏️', name:'簡答題',     desc:'文字回答',  parts:['一','二','三','四']},
       {type:'mixed',  icon:'⚡', name:'魔法挑戰！（混合）', desc:'所有題型混合 · 全面挑戰！', parts:null, fullSpan:true},
