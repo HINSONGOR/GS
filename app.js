@@ -2798,9 +2798,9 @@ const App = {
     '6.3': [
       {type:'mc',     icon:'📚', name:'選擇題',     desc:'四選一',    parts:['一','二','三','四']},
       {type:'fill',   icon:'🏮', name:'填充題',     desc:'填入答案',  parts:['一','二','三','四']},
-      {type:'classify',icon:'📝',name:'分類題',     desc:'分類整理',  parts:['一','二','三','四']},
+      {type:'classify',icon:'📝',name:'分類題',     desc:'分類整理',  parts:['一','三','四']},
       {type:'scenario',icon:'🎯',name:'生活情景題', desc:'解決問題',  parts:null},
-      {type:'order',  icon:'🔢', name:'排序題',     desc:'按序排列',  parts:['一','二','三']},
+      {type:'order',  icon:'🔢', name:'排序題',     desc:'按序排列',  parts:['一','三']},
       {type:'match',  icon:'🔗', name:'配對題',     desc:'左右配對',  parts:['一','二','三','四']},
       {type:'short',  icon:'✏️', name:'簡答題',     desc:'文字回答',  parts:['一','二','三','四']},
       {type:'mixed',  icon:'⚡', name:'魔法挑戰！（混合）', desc:'所有題型混合 · 全面挑戰！', parts:null, fullSpan:true},
